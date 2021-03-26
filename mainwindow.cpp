@@ -1,0 +1,27 @@
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
+#include "Widgets/mspwidget.h"
+#include "Utils/loader.h"
+#include <QVBoxLayout>
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::MainWindow)
+{
+    ui->setupUi(this);
+
+    setWindowTitle("Bildungssoftware");
+    setStyleSheet(readStylesheet("./../FinalMsp/Styling/lightmode.qss"));
+
+    QVBoxLayout* layout = new QVBoxLayout(ui->centralwidget);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setSpacing(0);
+    MspWidget* msp = new MspWidget;
+    layout->addWidget(msp);
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+

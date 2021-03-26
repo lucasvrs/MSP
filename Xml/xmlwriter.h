@@ -1,0 +1,517 @@
+#ifndef XMLWRITER_H
+#define XMLWRITER_H
+
+#include <QList>
+#include <QDomDocument>
+#include <QString>
+#include <QFile>
+#include <QDomAttr>
+#include <QDebug>
+
+/*! Converts tag names into usable strings
+ * \brief The XMLTagNameConverter struct
+ */
+struct XMLTagNameConverter
+{
+    QString tagName;
+    XMLTagNameConverter() : tagName("") {}
+    XMLTagNameConverter(const QString& name) { tagName = name; }
+    const QString& curName() const { return tagName; }
+
+    /*! Converts the current name string to a string with certain standards
+     * \brief convertedName
+     * \return QString
+     */
+    const QString& convertedName()
+    {
+        QString res = "";
+        for(int i = 0; i < tagName.length(); i++)
+        {
+            if(tagName[i] == " ")
+            {
+                tagName = tagName.replace(i, 1, "_");
+            }
+        }
+        return tagName;
+    }
+    void setCurName(const QString& name) { tagName = name; }
+};
+
+class XMLWriter
+{
+public:
+    XMLWriter(const QString& filename, const QString& rootTagName)
+    {
+        m_file = new QFile(filename);
+        m_doc = new QDomDocument;
+        m_rootElement = new QDomElement;
+        init(rootTagName);
+    }
+    XMLWriter(const QString& f)
+    {
+        m_nameConverter = false;
+        m_file = new QFile(f);
+        m_doc = new QDomDocument;
+        if(!m_file->open(QIODevice::ReadOnly))
+        {
+            return;
+        }
+        if(!m_doc->setContent(m_file))
+        {
+            m_file->close();
+            return;
+        }
+        m_file->close();
+        m_rootElement = new QDomElement(m_doc->documentElement());
+    }
+    /*! Appends element to document on first layer
+     * \brief appendElement
+     * \param elem - element to be append
+     */
+    void appendElement(QDomElement& elem)
+    {
+        m_doc->appendChild(elem);
+    }
+    /*! Appends element to document on first layer
+     * \brief appendElement
+     * \param tagName - tag name of element to be append on first layer of the document
+     */
+    void appendElement(const QString& tagName)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        m_doc->appendChild(elem);
+    }
+    /*! Appends element to document on first layer
+     * \brief appendElement
+     * \param tagName   - tag name of element
+     * \param text      - text of element
+     */
+    void appendElement(const QString& tagName, const QString& text)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        m_doc->appendChild(elem);
+        QDomText tElem = m_doc->createTextNode(text);
+        elem.appendChild(tElem);
+    }
+    /*! Appends element to document on first layer
+     * \brief appendElement
+     * \param tagName   - tag name of the element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElement(const QString& tagName, const QString& attr, int value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        m_doc->appendChild(elem);
+    }
+    /*! Appends element to document on first layer
+     * \brief appendElement
+     * \param tagName   - tag name of the element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElement(const QString& tagName, const QString& attr, float value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        m_doc->appendChild(elem);
+    }
+    /*! Appends element to document on first layer
+     * \brief appendElement
+     * \param tagName   - tag name of the element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElement(const QString& tagName, const QString& attr, double value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        m_doc->appendChild(elem);
+    }
+    /*! Appends element to document on first layer
+     * \brief appendElement
+     * \param tagName   - tag name of the element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElement(const QString& tagName, const QString& attr, const QString& value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        m_doc->appendChild(elem);
+    }
+    /*! Appends element to document on first layer
+     * \brief appendElement
+     * \param tagName   - tag name of the element
+     * \param text      - text of element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElement(const QString& tagName, const QString& text, const QString& attr, int value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        QDomText tElem = m_doc->createTextNode(text);
+        elem.appendChild(tElem);
+        m_doc->appendChild(elem);
+    }
+    /*! Appends element to document on first layer
+     * \brief appendElement
+     * \param tagName   - tag name of the element
+     * \param text      - text of element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElement(const QString& tagName, const QString& text, const QString& attr, float value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        QDomText tElem = m_doc->createTextNode(text);
+        elem.appendChild(tElem);
+        m_doc->appendChild(elem);
+    }
+    /*! Appends element to document on first layer
+     * \brief appendElement
+     * \param tagName   - tag name of the element
+     * \param text      - text of element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElement(const QString& tagName, const QString& text, const QString& attr, double value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        QDomText tElem = m_doc->createTextNode(text);
+        elem.appendChild(tElem);
+        m_doc->appendChild(elem);
+    }
+    /*! Appends element to document on first layer
+     * \brief appendElement
+     * \param tagName   - tag name of the element
+     * \param text      - text of element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElement(const QString& tagName, const QString& text, const QString& attr, const QString& value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        QDomText tElem = m_doc->createTextNode(text);
+        elem.appendChild(tElem);
+        m_doc->appendChild(elem);
+    }
+    /*! Appends element to document under element
+     * \brief appendElementUnderElement
+     * \param node  - node to append on
+     * \param child - node to be appended
+     */
+    void appendElementUnderElement(QDomNode& node, QDomNode& child)
+    {
+        node.appendChild(child);
+    }
+    /*! Appends element to document under element
+     * \brief appendElementUnderElement
+     * \param node      - node to append on
+     * \param tagName   - tag name of the element
+     */
+    void appendElementUnderElement(QDomNode& node, const QString& tagName)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        node.appendChild(elem);
+    }
+    /*! Appends element to document under element
+     * \brief appendElementUnderElement
+     * \param node      - node to append on
+     * \param tagName   - tag name of the element
+     * \param text      - text of element
+     */
+    void appendElementUnderElement(QDomNode& node, const QString& tagName, const QString& text)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        QDomText tElem = m_doc->createTextNode(text);
+        elem.appendChild(tElem);
+        node.appendChild(elem);
+    }
+    /*! Appends element to document under element
+     * \brief appendElementUnderElement
+     * \param node      - node to append on
+     * \param tagName   - tag name of the element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElementUnderElement(QDomNode& node, const QString& tagName, const QString& attr, int value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        node.appendChild(elem);
+    }
+    /*! Appends element to document under element
+     * \brief appendElementUnderElement
+     * \param node      - node to append on
+     * \param tagName   - tag name of the element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElementUnderElement(QDomNode& node, const QString& tagName, const QString& attr, float value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        node.appendChild(elem);
+    }
+    /*! Appends element to document under element
+     * \brief appendElementUnderElement
+     * \param node      - node to append on
+     * \param tagName   - tag name of the element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElementUnderElement(QDomNode& node, const QString& tagName, const QString& attr, double value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        node.appendChild(elem);
+    }
+    /*! Appends element to document under element
+     * \brief appendElementUnderElement
+     * \param node      - node to append on
+     * \param tagName   - tag name of the element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElementUnderElement(QDomNode& node, const QString& tagName, const QString& attr, const QString& value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        node.appendChild(elem);
+    }
+    /*! Appends element to document under element
+     * \brief appendElementUnderElement
+     * \param node      - node to append on
+     * \param tagName   - tag name of the element
+     * \param text      - text of element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElementUnderElement(QDomNode& node, const QString& tagName, const QString& text, const QString& attr, int value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        QDomText tElem = m_doc->createTextNode(text);
+        elem.appendChild(tElem);
+        node.appendChild(elem);
+    }
+    /*! Appends element to document under element
+     * \brief appendElementUnderElement
+     * \param node      - node to append on
+     * \param tagName   - tag name of the element
+     * \param text      - text of element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElementUnderElement(QDomNode& node, const QString& tagName, const QString& text, const QString& attr, float value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        QDomText tElem = m_doc->createTextNode(text);
+        elem.appendChild(tElem);
+        node.appendChild(elem);
+    }
+    /*! Appends element to document under element
+     * \brief appendElementUnderElement
+     * \param node      - node to append on
+     * \param tagName   - tag name of the element
+     * \param text      - text of element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElementUnderElement(QDomNode& node, const QString& tagName, const QString& text, const QString& attr, double value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        QDomText tElem = m_doc->createTextNode(text);
+        elem.appendChild(tElem);
+        node.appendChild(elem);
+    }
+    /*! Appends element to document under element
+     * \brief appendElementUnderElement
+     * \param node      - node to append on
+     * \param tagName   - tag name of the element
+     * \param text      - text of element
+     * \param attr      - attribute of the element
+     * \param value     - attributes value
+     */
+    void appendElementUnderElement(QDomNode& node, const QString& tagName, const QString& text, const QString& attr, const QString& value)
+    {
+        QDomElement elem = m_doc->createElement(createUniqueTagName(tagName));
+        elem.setAttribute(attr, value);
+        QDomText tElem = m_doc->createTextNode(text);
+        elem.appendChild(tElem);
+        node.appendChild(elem);
+    }
+    /*! Creates new element on first layer
+     * \brief createElement
+     * \param tagName - tag name of the element
+     * \return QDomElement
+     */
+    QDomElement createElement(const QString& tagName)
+    {
+        return m_doc->createElement(tagName);
+    }
+    /*! Returns element having passed tag name and id value
+     * \brief getElementByAttribute
+     * \param tagName   - tag name of the element
+     * \param value     - value of id
+     * \return QDomElement
+     */
+    QDomNode getElementByAttribute(const QString& tagName, const QString& value)
+    {
+        QDomNodeList list = m_doc->elementsByTagName(tagName);
+        for(int i = 0; i < list.size(); i++)
+        {
+            if(list.at(i).toElement().attribute("id") == value)
+            {
+                return list.at(i);
+            }
+        }
+        return QDomNode();
+    }
+    /*! Returns element having passed tag name
+     * \brief getElementByTagName
+     * \param tagName - tag name of the element
+     * \return QDomElement
+     */
+    QDomNode getElementByTagName(const QString& tagName)
+    {
+        QDomNodeList list = m_doc->elementsByTagName(tagName);
+        QDomNode node = list.at(0);
+        return node;
+    }
+    /*! Return node having passed year element and month element as parent
+     * \brief getElementPerDate
+     * \param year  - element of second parent
+     * \param month - element of first parent
+     * \return QDomNode
+     */
+    QDomNode getElementPerDate(const QDomElement& year, const QDomElement& month)
+    {
+        QDomNodeList list = m_doc->elementsByTagName(month.tagName());
+        for(int i = 0; i < list.size(); i++)
+        {
+            QDomNode node = list.at(i);
+            if(node.toElement().attribute("id") == month.attribute("id"))
+            {
+                if(node.parentNode().toElement().attribute("id") == year.attribute("id"))
+                {
+                    return node;
+                }
+            }
+        }
+        return QDomNode();
+    }
+    /*! Return node having passed day element, month element and day element as parent
+     * \brief getElementPerDate
+     * \param year  - element of third parent
+     * \param month - element of second parent
+     * \param day   - element of first parent
+     * \return QDomNode
+     */
+    QDomNode getElementPerDate(const QDomElement& year, const QDomElement& month, const QDomElement& day)
+    {
+        QDomNodeList list = m_doc->elementsByTagName(day.tagName());
+        for(int i = 0; i < list.size(); i++)
+        {
+            QDomNode node = list.at(i);
+            if(node.toElement().attribute("id") == day.attribute("id"))
+            {
+                if(node.parentNode().toElement().attribute("id") == month.attribute("id"))
+                {
+                    if(node.parentNode().parentNode().toElement().attribute("id") == year.attribute("id"))
+                    {
+                        return node;
+                    }
+                }
+            }
+        }
+        return QDomNode();
+    }
+    /*! Removes element out of document
+     * \brief removeElement
+     * \param tagName - tag name of element
+     */
+    void removeElement(const QString& tagName)
+    {
+        if(find(tagName))
+        {
+            m_doc->removeChild(getElementByTagName(tagName));
+        }
+    }
+    /*! Saves document to xml
+     * \brief saveXML
+     */
+    void saveXML()
+    {
+        if(!m_file->open(QIODevice::WriteOnly | QIODevice::Text))
+        {
+            return;
+        }
+        QTextStream stream( m_file );
+        stream << m_doc->toString();
+        m_file->close();
+    }
+
+private:
+    bool m_nameConverter = true;
+    QFile* m_file;
+    QDomDocument* m_doc;
+    QDomElement* m_rootElement;
+    /*! Initializes document with root element
+     * \brief init
+     * \param rootTagName - tag name of root element
+     */
+    void init(const QString& rootTagName)
+    {
+        *m_rootElement = m_doc->createElement(rootTagName);
+        m_doc->appendChild(*m_rootElement);
+    }
+    /*! Returns wether the searched element is existend
+     * \brief find
+     * \param tagName - tag name of the element
+     * \return bool
+     */
+    bool find(const QString& tagName)
+    {
+        if(m_doc->elementsByTagName(tagName).size() == 0)
+        {
+            return false;
+        }
+        return true;
+    }
+    /*! Creates a unique tag name for an element
+     * \brief createUniqueTagName
+     * \param tagName - tag name of the element
+     * \return QString
+     */
+    const QString createUniqueTagName(const QString& tagName)
+    {
+        if(find(tagName) && m_nameConverter)
+        {
+            QString newTagName;
+            int duplicate = 2;
+            while(true)
+            {
+                newTagName = tagName;
+                newTagName += QString::number(duplicate);
+                if(!find(newTagName))
+                {
+                    return newTagName;
+                }
+                duplicate++;
+            }
+        }
+        return tagName;
+    }
+
+};
+
+#endif // XMLWRITER_H

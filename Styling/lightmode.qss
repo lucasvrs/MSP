@@ -1,0 +1,45 @@
+*{
+    background-color: white;
+    color: black;
+}
+
+/*********************************************************
+*>Buttons
+*********************************************************/
+QPushButton{
+    background-color: @sideMenuColor;
+    color: @textColor;
+}
+
+QPushButton:hover{
+    background-color: @sideMenuHoverColor;
+}
+
+QPushButton#navbtn{
+    background-color: @sideMenuColor;
+}
+
+QPushButton#navbtn:hover{
+    background-color: @sideMenuHoverColor;
+}
+
+QPushButton#navbtn:pressed{
+    background-color: @sideMenuPressedColor;
+}
+
+QPushButton#navbtn:default{
+    background-color: @sideMenuPressedColor;
+    border-left: 2px solid @textColor;
+}
+
+/*********************************************************
+*>GroupBoxes
+*********************************************************/
+DayGroupBox{
+    background-color: white;
+    border: 1px solid black;
+}
+
+DayGroupBox QLabel{
+    background-color: rgba(0, 0, 0, 0);
+}
