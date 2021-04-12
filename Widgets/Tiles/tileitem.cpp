@@ -1,7 +1,13 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "tileitem.h"
 #include <QPainter>
 
-TileItem::TileItem(QGraphicsItem* parent) : QGraphicsItem(parent), m_height(100), m_width(100)
+TileItem::TileItem(QGraphicsItem* parent) : QGraphicsItem(parent),  m_id(-1), m_height(100), m_width(100), m_widget(nullptr)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, true);
 }
@@ -21,6 +27,16 @@ void TileItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
     pen.setColor(m_textColor);
     painter->setPen(pen);
     if(!m_text.isEmpty()) painter->drawText(QPointF(-m.width(m_text)/3, 0), m_text);
+}
+
+int TileItem::id() const
+{
+    return m_id;
+}
+
+void TileItem::setId(int id)
+{
+    m_id = id;
 }
 
 QRectF TileItem::boundingRect() const
@@ -58,6 +74,11 @@ void TileItem::setWidget(QWidget *widget)
     m_widget = widget;
 }
 
+void TileItem::setPreviews(QList<TileItem*> previews)
+{
+    m_previews = previews;
+}
+
 double TileItem::height() const
 {
     return m_height;
@@ -76,4 +97,9 @@ const QString& TileItem::text() const
 QWidget* TileItem::widget() const
 {
     return m_widget;
+}
+
+QList<TileItem*> TileItem::previews() const
+{
+    return m_previews;
 }

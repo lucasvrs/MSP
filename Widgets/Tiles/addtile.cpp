@@ -1,10 +1,16 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "addtile.h"
 #include <QPainter>
 #include <QDebug>
 
 AddTile::AddTile(QGraphicsItem *parent) : TileItem(parent)
 {
-
+    setText("+");
 }
 
 void AddTile::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
@@ -19,7 +25,7 @@ void AddTile::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget
     QFont f("Helvetica");
     painter->setFont(f);
     QFontMetrics m(f);
-    painter->drawText(QPointF(-m.width("+")/3, 0), "+");
+    painter->drawText(QPointF(-m.width(text())/3, 0), text());
 }
 
 //EVENTS*******************************************************

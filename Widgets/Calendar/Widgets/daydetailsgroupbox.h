@@ -19,7 +19,6 @@ private:
     QDate* m_date;
     QListWidget* m_listW;
     QLineEdit* m_nameEdit;
-    QPushButton* m_colorBtn;
     QPushButton* m_saveBtn;
     QPushButton* m_cancelBtn;
 

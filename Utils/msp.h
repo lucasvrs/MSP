@@ -42,13 +42,18 @@ struct MSP
         NoPage,
         PageAmount
     };
-    static const RgbHolder mainColor(){return RgbHolder(69, 137, 129);}
-    static const RgbHolder sideMenuColor(){return RgbHolder(37, 70, 70);}
-    static const RgbHolder sideMenuHoverColor(){return RgbHolder(50, 100, 87);}
-    static const RgbHolder sideMenuPressedColor(){return RgbHolder(50, 130, 87);}
-    static const RgbHolder textColor(){return RgbHolder(237, 235, 226);}
-    static const RgbHolder featureColor(){return RgbHolder(154, 171, 156);}
-    static const RgbHolder contrastColor(){return RgbHolder(205, 42, 49);}
+    static const RgbHolder mainColor(){return RgbHolder(48, 230, 88);}
+    static const RgbHolder sideMenuColor(){return RgbHolder(26, 148, 55);}
+    static const RgbHolder sideMenuHoverColor(){return RgbHolder(66, 184, 92);}
+    static const RgbHolder sideMenuPressedColor(){return RgbHolder(1, 110, 25);}
+    static const RgbHolder textColor(){return RgbHolder(255, 255, 255);}
+    static const RgbHolder darkLightTextColor(){return RgbHolder(200, 200, 200);};
+    static const RgbHolder darkTextColor(){return RgbHolder(0, 0, 0);}
+    static const RgbHolder highlightColor(){return RgbHolder(144, 205, 45);}
+    static const RgbHolder lightHighlightColor(){return RgbHolder(196, 240, 125);}
+    static const RgbHolder darkHighlightColor(){return RgbHolder(112, 170, 19);}
+    static const RgbHolder warmContrastColor(){return RgbHolder(222, 133, 49);}
+    static const RgbHolder warmDarkContrastColor(){return RgbHolder(185, 101, 21);}
 };
 
 /*! Resembling the structure of a page

@@ -21,7 +21,6 @@ private:
 
 signals:
     void newResult(double res);
-    void showPrevious();
 
 private slots:
     void addNumber(const QString& n);

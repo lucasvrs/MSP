@@ -123,7 +123,7 @@ void NavigationWidget::updatePrevPages(Page page)
     {
         if(m_prevPagesIndex != m_prevPages.size() - 1)
         {
-            for(unsigned long i = m_prevPages.size() - 1; i > m_prevPagesIndex; i--)
+            for(size_t i = m_prevPages.size() - 1; i > m_prevPagesIndex; i--)
             {
                 m_prevPages.pop_back();
             }

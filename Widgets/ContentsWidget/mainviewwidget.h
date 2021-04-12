@@ -9,6 +9,9 @@ class MainViewWidget : public QStackedWidget
 public:
     explicit MainViewWidget(QWidget *parent = nullptr);
 
+private:
+    QWidget* m_app;
+
 signals:
 
 };

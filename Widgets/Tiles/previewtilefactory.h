@@ -12,6 +12,7 @@ class PreviewTileFactory
 public:
     PreviewTileFactory();
     QList<TileItem*> previewTiles();
+    TileItem* tile(const QString& tagName);
 
 private:
     XMLReader* m_reader;

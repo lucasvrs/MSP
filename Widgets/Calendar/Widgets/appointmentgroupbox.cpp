@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "appointmentgroupbox.h"
 #include <QHBoxLayout>
 #include <QLabel>
@@ -5,8 +11,7 @@
 AppointmentGroupBox::AppointmentGroupBox(const QString& title, QWidget* parent) :
     QGroupBox(parent)
 {
-    setAutoFillBackground(true);
-    setPalette(QPalette(Qt::green));
+    setObjectName("appointmentBox");
 
     QHBoxLayout* layout = new QHBoxLayout(this);
 

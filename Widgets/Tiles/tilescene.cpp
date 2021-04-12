@@ -1,11 +1,21 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "tilescene.h"
 #include "tileitem.h"
 #include "tileconstants.h"
 #include "tilefactory.h"
 #include "addtile.h"
+#include "createcollectiondialog.h"
+#include "tilefactory.h"
 #include <QGraphicsSceneMouseEvent>
+#include <QDebug>
+#include <QMenu>
 
-TileScene::TileScene(QObject *parent) : QGraphicsScene(parent)
+TileScene::TileScene(QObject *parent) : QGraphicsScene(parent), m_dialog(nullptr)
 {
     m_factory = new TileFactory;
 }
@@ -17,14 +27,14 @@ TileScene::TileScene(QObject *parent) : QGraphicsScene(parent)
 void TileScene::addItems()
 {
     m_tiles = m_factory->tiles();
-    m_tileLength = ((m_width - 20) - 5 * SPACING) / 4;
-    double xStart = -2 * m_tileLength - 2 * SPACING;
+    m_tileLength = ((m_width - 20) - (m_cols + 1) * SPACING) / m_cols;
+    double xStart = -(m_cols/2.0) * m_tileLength - (m_cols/2.0) * SPACING;
     double x = xStart;
     double height = 0;
     int row = 0;
     for(int i = 0; i < m_tiles.size(); i++)
     {
-        if(i % 4 == 0)
+        if(i % m_cols == 0)
         {
             row++;
             x = xStart;
@@ -36,7 +46,7 @@ void TileScene::addItems()
         x += (m_tileLength + SPACING);
         addItem(tile);
     }
-    if(m_tiles.size() % 4 == 0)
+    if(m_tiles.size() % m_cols == 0)
     {
         row++;
         x = xStart;
@@ -70,8 +80,8 @@ void TileScene::updateScene(double w)
     m_width = w;
     deleteItems();
     addItems();
-    int add = (m_tiles.size() + 1)%4;
-    int fac = ((m_tiles.size() + 1) - ((m_tiles.size() + 1)%4)) / 4;
+    int add = (m_tiles.size() + 1)%m_cols;
+    int fac = ((m_tiles.size() + 1) - ((m_tiles.size() + 1)%m_cols)) / m_cols;
     if(add != 0)
     {
         fac++;
@@ -87,7 +97,56 @@ void TileScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* e)
     if(item != nullptr)
     {
         TileItem* tile = static_cast<TileItem*>(item);
-        emit showSubject(tile->text());
+        if(e->button() == Qt::MouseButton::LeftButton)
+        {
+            if(tile->text() == "+")
+            {
+                if(m_dialog == nullptr)
+                {
+                    m_dialog = new CreateCollectionDialog;
+                    m_dialog->show();
+                    connect(m_dialog, &CreateCollectionDialog::newTile, [this]()
+                    {
+                        updateScene(m_width);
+                    });
+                    connect(m_dialog, &CreateCollectionDialog::closed, [this]()
+                    {
+                        m_dialog = nullptr;
+                    });
+                }
+                else
+                {
+                    m_dialog->raise();
+                }
+            }
+            else
+            {
+                emit showSubject(tile->text(), tile->previews());
+            }
+        }
     }
     QGraphicsScene::mouseReleaseEvent(e);
+}
+
+void TileScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* e)
+{
+    QGraphicsItem* item = itemAt(e->scenePos(), QTransform());
+    if(item != nullptr)
+    {
+        TileItem* tile = static_cast<TileItem*>(item);
+        QMenu menu;
+        menu.addAction("Delete", [this, tile]()
+        {
+            removeTile(tile);
+        });
+        menu.exec(e->screenPos());
+    }
+    QGraphicsScene::contextMenuEvent(e);
+}
+
+void TileScene::removeTile(TileItem* tile)
+{
+    TileFactory fac;
+    fac.deleteTile(tile->text(), tile->id());
+    updateScene(m_width);
 }

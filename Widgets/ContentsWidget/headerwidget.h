@@ -16,6 +16,7 @@ private:
     QLabel* m_headerLabel;
 
 signals:
+    void showOptions();
 
 public slots:
     void setHeader(const QString& title);

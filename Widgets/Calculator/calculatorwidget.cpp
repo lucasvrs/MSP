@@ -1,9 +1,15 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Andreas Heidenreich
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "calculatorwidget.h"
 #include "calculator.h"
 #include <QGridLayout>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QRegExp>
+#include <QRegExpValidator>
 #include <QDebug>
 
 CalculatorWidget::CalculatorWidget(QWidget *parent) : QWidget(parent)
@@ -12,32 +18,39 @@ CalculatorWidget::CalculatorWidget(QWidget *parent) : QWidget(parent)
 
     //layout
     QGridLayout* layout = new QGridLayout(this);
+    QSpacerItem* hSpacerL = new QSpacerItem(50, 10, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    QSpacerItem* hSpacerR = new QSpacerItem(50, 10, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    QSpacerItem* vSpacerT = new QSpacerItem(10, 50, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    QSpacerItem* vSpacerB = new QSpacerItem(10, 50, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    layout->setSpacing(1);
     m_edit = new QLineEdit;
-    QPushButton* prevBtn = new QPushButton("Prev");
-    connect(prevBtn, &QPushButton::clicked, this, &CalculatorWidget::showPrevious);
-    layout->addWidget(prevBtn, 0, 0);
-    layout->addWidget(m_edit, 1, 0, 1, 5);
-    int row = 1;
+    layout->addItem(vSpacerT, 0, 1);
+    layout->addItem(hSpacerL, 1, 0);
+    layout->addWidget(m_edit, 2, 1, 1, 5);
+    int row = 2;
     for(int i = 0; i < 9; i++)
     {
         if(i%3 == 0) row++;
         QPushButton* btn = new QPushButton(QString::number(i + 1));
-        layout->addWidget(btn, row, i - (3 * (row - 2)));
+        btn->setObjectName("numberBtn");
+        layout->addWidget(btn, row, (i + 1) - (3 * (row - 3)));
         connect(btn, &QPushButton::clicked, [this, btn]()
         {
             addNumber(btn->text());
         });
     }
     QPushButton* clearBtn = new QPushButton("AC");
+    clearBtn->setObjectName("highlightBtn");
     QPushButton* zeroBtn = new QPushButton("0");
+    zeroBtn->setObjectName("numberBtn");
     QPushButton* commaBtn = new QPushButton(".");
     connect(commaBtn, &QPushButton::clicked, [this, commaBtn]()
     {
         m_edit->setText(m_edit->text() + commaBtn->text());
     });
-    layout->addWidget(clearBtn, 5, 0);
-    layout->addWidget(zeroBtn, 5, 1);
-    layout->addWidget(commaBtn, 5, 2);
+    layout->addWidget(clearBtn, 6, 1);
+    layout->addWidget(zeroBtn, 6, 2);
+    layout->addWidget(commaBtn, 6, 3);
     QPushButton* addBtn = new QPushButton("+");
     QPushButton* subBtn = new QPushButton("-");
     QPushButton* multBtn = new QPushButton("*");
@@ -47,13 +60,15 @@ CalculatorWidget::CalculatorWidget(QWidget *parent) : QWidget(parent)
     m_actions = {addBtn, subBtn, multBtn, divBtn, powBtn, moduloBtn};
     QPushButton* equalsBtn = new QPushButton("=");
     connect(equalsBtn, &QPushButton::clicked, this, &CalculatorWidget::calcResult);
-    layout->addWidget(powBtn, 2, 3);
-    layout->addWidget(moduloBtn, 2, 4);
-    layout->addWidget(addBtn, 3, 3);
-    layout->addWidget(subBtn, 3, 4);
-    layout->addWidget(multBtn, 4, 3);
-    layout->addWidget(divBtn, 4, 4);
-    layout->addWidget(equalsBtn, 5, 3, 1, 2);
+    layout->addWidget(powBtn, 3, 4);
+    layout->addWidget(moduloBtn, 3, 5);
+    layout->addWidget(addBtn, 4, 4);
+    layout->addWidget(subBtn, 4, 5);
+    layout->addWidget(multBtn, 5, 4);
+    layout->addWidget(divBtn, 5, 5);
+    layout->addWidget(equalsBtn, 6, 4, 1, 2);
+    layout->addItem(vSpacerB, 7, 1);
+    layout->addItem(hSpacerR, 1, 6);
 
     for(QPushButton* btn : m_actions)
     {

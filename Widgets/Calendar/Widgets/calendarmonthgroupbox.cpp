@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "calendarmonthgroupbox.h"
 #include "daygroupbox.h"
 #include <QDate>
@@ -105,6 +111,7 @@ DayGroupBox* CalendarMonthGroupBox::getDayBox(const QDate &date)
 void CalendarMonthGroupBox::addDay(const QDate& date, int row, int weekday, bool isCurMonth)
 {
     DayGroupBox* day = new DayGroupBox(date, isCurMonth);
+    (isCurMonth) ? day->setObjectName("curMonth") : day->setObjectName("otherMonth");
     connect(day, &DayGroupBox::clicked, this, &CalendarMonthGroupBox::dayClicked);
     m_layout->addWidget(day, row, weekday - 1);
     m_dayBoxes.append(day);

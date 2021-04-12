@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "daydetailsgroupbox.h"
 #include "Xml/xmlreader.h"
 #include "Xml/xmlwriter.h"
@@ -16,6 +22,8 @@
 DayDetailsGroupBox::DayDetailsGroupBox(const QDate& date, QWidget *parent) :
     QGroupBox(parent)
 {
+    setFixedSize(400, 400);
+
     //current date
     m_date = new QDate(date.year(), date.month(), date.day());
 
@@ -46,12 +54,10 @@ DayDetailsGroupBox::DayDetailsGroupBox(const QDate& date, QWidget *parent) :
     layout->addWidget(addBtn, 1, 0);
     layout->addWidget(m_listW, 2, 0, 1, 3);
     m_nameEdit = new QLineEdit;
-    m_colorBtn = new QPushButton;
     m_saveBtn = new QPushButton("Save");
     m_cancelBtn = new QPushButton("Cancel");
     m_nameEdit->setPlaceholderText("Appointment title");
-    layout->addWidget(m_colorBtn, 3, 0, 0);
-    layout->addWidget(m_nameEdit, 3, 1, 1, 2);
+    layout->addWidget(m_nameEdit, 3, 0, 1, 3);
     layout->addWidget(m_cancelBtn, 4, 1);
     layout->addWidget(m_saveBtn, 4, 2);
 
@@ -160,7 +166,6 @@ void DayDetailsGroupBox::addEntry(const QString& entry)
  */
 void DayDetailsGroupBox::hideAll()
 {
-    m_colorBtn->hide();
     m_saveBtn->hide();
     m_cancelBtn->hide();
     m_nameEdit->hide();
@@ -171,7 +176,6 @@ void DayDetailsGroupBox::hideAll()
  */
 void DayDetailsGroupBox::showAll()
 {
-    m_colorBtn->show();
     m_saveBtn->show();
     m_cancelBtn->show();
     m_nameEdit->show();

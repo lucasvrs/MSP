@@ -1,11 +1,11 @@
 #ifndef DAYGROUPBOX_H
 #define DAYGROUPBOX_H
 
-#include <QGroupBox>
+#include <QWidget>
 
 class QGridLayout;
 
-class DayGroupBox : public QGroupBox
+class DayGroupBox : public QWidget
 {
     Q_OBJECT
 
@@ -25,19 +25,11 @@ private:
     double m_height;
     double m_width;
     QDate* m_date;
-    QPalette m_defPalette;
-    QPalette curDayPalette() const;
-    QPalette hoverPalette() const;
-    QPalette otherMonthPalette() const;
-    QPalette pressedPalette() const;
     QStringList allAppointments();
 
 protected:
-    void enterEvent(QEvent* e) override;
-    void leaveEvent(QEvent* e) override;
-    void mousePressEvent(QMouseEvent* e) override;
     void mouseReleaseEvent(QMouseEvent* e) override;
-    void paintEvent(QPaintEvent* e) override;
+    void paintEvent(QPaintEvent*) override;
 
 signals:
     void clicked(const QDate& date);

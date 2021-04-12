@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "loader.h"
 #include "Xml/xmlreader.h"
 #include "Utils/msp.h"
@@ -36,8 +42,13 @@ QString loadStylesheet(const QString& path)
     contents.replace("@sideMenuHoverColor", getColorString(MSP::sideMenuHoverColor()));
     contents.replace("@sideMenuPressedColor", getColorString(MSP::sideMenuPressedColor()));
     contents.replace("@textColor", getColorString(MSP::textColor()));
-    contents.replace("@featureColor", getColorString(MSP::featureColor()));
-    contents.replace("@contrastColor", getColorString(MSP::contrastColor()));
+    contents.replace("@lightHighlightColor", getColorString(MSP::lightHighlightColor()));
+    contents.replace("@highlightColor", getColorString(MSP::highlightColor()));
+    contents.replace("@darkTextColor", getColorString(MSP::darkTextColor()));
+    contents.replace("@darkLightTextColor", getColorString(MSP::darkLightTextColor()));
+    contents.replace("@darkHighlightColor", getColorString(MSP::darkHighlightColor()));
+    contents.replace("@warmContrastColor", getColorString(MSP::warmContrastColor()));
+    contents.replace("@warmDarkContrastColor", getColorString(MSP::warmDarkContrastColor()));
     f.close();
     return contents;
 }

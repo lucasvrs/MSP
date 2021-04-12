@@ -1,0 +1,4 @@
+*{
+    background-color: rgba(46, 47, 48, 255);
+    color: black;
+}

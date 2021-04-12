@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "Utils/calendarconstants.h"
 #include "Widgets/calendarmonthgroupbox.h"
 #include "calendarwidget.h"
@@ -16,6 +22,7 @@ CalendarWidget::CalendarWidget(QWidget *parent) :
     m_validateOpen(false),
     m_bg(new DayDetailsBgWidget(QDate()))
 {
+    setAutoFillBackground(true);
     m_layout = new QGridLayout(this);
 
     m_curDate = new QDate(QDateTime::currentDateTime().date());
@@ -54,8 +61,7 @@ CalendarWidget::CalendarWidget(QWidget *parent) :
     QPushButton* navBtns[2] = {prevMonthBtn, nextMonthBtn};
     for(QPushButton* btn : navBtns)
     {
-        btn->setStyleSheet("QPushButton{ background-color: rgba(0, 0, 0, 0); }"
-                           "QPushButton:hover{ background-color: rgba(170, 200, 255, 100); };");
+        btn->setObjectName("navBtns");
         btn->setFixedWidth(m.width(btn->text()) + 5);
         btn->setFont(arrowFont);
         btn->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);

@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "daygroupbox.h"
 #include <QDate>
 #include <QGridLayout>
@@ -8,22 +14,20 @@
 #include <QPainter>
 #include <QPaintEngine>
 #include <QDomElement>
+#include <QStyleOption>
 #include "Xml/xmlreader.h"
 #include "appointmentgroupbox.h"
 
 DayGroupBox::DayGroupBox(const QDate& date, bool mainMonth, QWidget *parent) :
-    QGroupBox(parent),
+    QWidget(parent),
     m_mainMonth(mainMonth)
 {
+    setAutoFillBackground(true);
+    //setMouseTracking(true);
     //defines style and attributes
     m_date = new QDate(date);
-    (date == QDate::currentDate()) ? m_defPalette = curDayPalette() :
-            m_defPalette = QPalette(QColor(255, 255, 255));
-    if(!mainMonth) m_defPalette = otherMonthPalette();
-    setPalette(m_defPalette);
     m_layout = new QGridLayout(this);
-    setAutoFillBackground(true);
-    setMouseTracking(true);
+    m_layout->setSpacing(1);
     addAppointments();
 }
 
@@ -66,8 +70,6 @@ void DayGroupBox::addAppointments()
         m_layout->addWidget(app);
         counter++;
     }
-    //QSpacerItem* vSpacer = new QSpacerItem(1, 50, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    //m_layout->addItem(vSpacer, 5, 0);
 }
 
 /*! Removes layout
@@ -91,34 +93,6 @@ void DayGroupBox::setWidth(double width){m_width = width;}
 
 double DayGroupBox::width() const{return m_width;}
 
-QPalette DayGroupBox::curDayPalette() const
-{
-    QPalette p;
-    p.setColor(QPalette::Window, QColor(0, 255, 0));
-    return p;
-}
-
-QPalette DayGroupBox::hoverPalette() const
-{
-    QPalette p;
-    p.setColor(QPalette::Window, QColor(255, 160, 160));
-    return p;
-}
-
-QPalette DayGroupBox::otherMonthPalette() const
-{
-    QPalette p;
-    p.setColor(QPalette::Window, QColor(200, 200, 200));
-    return p;
-}
-
-QPalette DayGroupBox::pressedPalette() const
-{
-    QPalette p;
-    p.setColor(QPalette::Window, QColor(255, 0, 0));
-    return p;
-}
-
 /*! Reads all appointments out of a xml file
  * \brief DayGroupBox::allAppointments
  * \return
@@ -138,32 +112,16 @@ QStringList DayGroupBox::allAppointments()
 }
 
 //EVENTS*****************************************************************
-void DayGroupBox::enterEvent(QEvent* e)
-{
-    setPalette(hoverPalette());
-    QGroupBox::enterEvent(e);
-}
-
-void DayGroupBox::leaveEvent(QEvent* e)
-{
-    setPalette(m_defPalette);
-    QGroupBox::leaveEvent(e);
-}
-
-void DayGroupBox::mousePressEvent(QMouseEvent* e)
-{
-    setPalette(pressedPalette());
-    QGroupBox::mousePressEvent(e);
-}
-
 void DayGroupBox::mouseReleaseEvent(QMouseEvent* e)
 {
-    setPalette(m_defPalette);
-    QGroupBox::mouseReleaseEvent(e);
+    QWidget::mouseReleaseEvent(e);
     emit clicked(*m_date);
 }
 
-void DayGroupBox::paintEvent(QPaintEvent* e)
+void DayGroupBox::paintEvent(QPaintEvent*)
 {
-    QGroupBox::paintEvent(e);
+    QStyleOption opt;
+    opt.init(this);
+    QPainter p(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }

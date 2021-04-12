@@ -11,7 +11,7 @@ public:
     explicit InterfaceOptionsWidget(QWidget *parent = nullptr);
 
 signals:
-
+    void closeOptions();
 };
 
 #endif // INTERFACEOPTIONSWIDGET_H

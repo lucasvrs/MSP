@@ -1,0 +1,6 @@
+#ifndef SPECTRUMCONSTANTS_H
+#define SPECTRUMCONSTANTS_H
+
+constexpr int LIMIT = 30;
+
+#endif // SPECTRUMCONSTANTS_H

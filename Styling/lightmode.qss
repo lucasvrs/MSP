@@ -43,3 +43,208 @@ DayGroupBox{
 DayGroupBox QLabel{
     background-color: rgba(0, 0, 0, 0);
 }
+
+/*********************************************************
+*>Widgets
+*********************************************************/
+
+/*----------------------
+*>CalculatorWidget
+----------------------*/
+NavigationWidget{
+
+}
+
+/*----------------------
+*>CalculatorWidget
+----------------------*/
+CalculatorWidget QLineEdit{
+    background-color: @textColor;
+    color: @darkTextColor;
+    border: 1px solid @darkTextColor;
+    height: 100px;
+    font-size: 32px;
+}
+
+CalculatorWidget QPushButton{
+    background-color: @highlightColor;
+    border: 1px solid @darkTextColor;
+    height: 100px;
+    width: 200px;
+    font-size: 20px;
+}
+
+CalculatorWidget QPushButton:hover{
+    background-color: @darkHighlightColor;
+}
+
+CalculatorWidget QPushButton#numberBtn{
+    background-color: @textColor;
+    color: @darkTextColor;
+}
+
+CalculatorWidget QPushButton#numberBtn:hover{
+    background-color: @darkLightTextColor;
+}
+
+CalculatorWidget QPushButton#highlightBtn{
+    background-color: @warmContrastColor;
+}
+
+CalculatorWidget QPushButton#highlightBtn:hover{
+    background-color: @warmDarkContrastColor;
+}
+
+/*----------------------
+*>ConverterWidget
+----------------------*/
+ConverterWidget QComboBox{
+    background-color: @highlightColor;
+    color: @textColor;
+    border: 1px solid @darkTextColor;
+    border-radius: 5%;
+    height: 30px;
+}
+
+ConverterWidget QLineEdit{
+    background-color: @textColor;
+    color: @darkTextColor;
+    border: 1px solid @darkTextColor;
+    border-radius: 5%;
+    height: 30px;
+}
+
+/*----------------------
+*>EraWidget
+----------------------*/
+EraWidget QSlider::handle{
+    background-color: @mainColor;
+}
+
+EraWidget QPushButton{
+    background-color: @mainColor;
+    color: @textColor;
+}
+
+/*----------------------
+*>RaytracingWidget
+----------------------*/
+RaytracingWidget QGraphicsView{
+    border: 2px solid @darkTextColor;
+    border-radius: 10%;
+}
+
+/*----------------------
+*>CalendarWidget
+----------------------*/
+CalendarWidget QGroupBox#appointmentBox{
+    background-color: @mainColor;
+}
+
+CalendarWidget QPushButton{
+    background-color: @mainColor;
+}
+
+CalendarWidget QPushButton#navBtns{
+    background-color: rgba(0, 0, 0, 0);
+    color: @darkTextColor;
+}
+
+CalendarWidget QPushButton#navBtns:hover{
+    background-color: @highlightColor;
+    color: @textColor;
+}
+
+DayGroupBox#curMonth{
+    background-color: @textColor;
+}
+
+DayGroupBox#curMonth:hover{
+    background-color: @warmContrastColor;
+}
+
+DayGroupBox#curMonth QLabel{
+    color: @darkTextColor;
+}
+
+DayGroupBox#otherMonth{
+    background-color: @darkLightTextColor;
+}
+
+DayGroupBox#otherMonth:hover{
+    background-color: @warmDarkContrastColor;
+}
+
+DayGroupBox#otherMonth{
+    color: @darkTextColor;
+}
+
+DayDetailsBgWidget{
+    background-color: rgba(0, 0, 0, 150);
+}
+
+SearchDialog QPushButton{
+    background-color: @sideMenuColor;
+    color: @textColor;
+}
+
+SearchDialog QPushButton:hover{
+    background-color: @sideMenuHoverColor;
+}
+
+SearchDialog QPushButton::pressed{
+    background-color: @sideMenuPressedColor;
+}
+
+/*----------------------
+*>ReactionWidget
+----------------------*/
+Reaction QTextEdit#reactionRed{
+    background-color: red;
+    color: white;
+}
+
+Reaction QTextEdit#reactionGreen{
+    background-color: green;
+    color: white;
+}
+
+Reaction QTextEdit#reactionStart{
+    background-color: @textColor;
+}
+
+/*----------------------
+*>FormulaCollectionWidget
+----------------------*/
+Formelsammlung QLineEdit{
+    background-color: @textColor;
+    color: @darkTextColor;
+    height: 30px;
+    border: 2px solid @darkTextColor;
+    border-radius: 5%;
+}
+
+Formelsammlung QListView{
+    show-decoration-selected: 1;
+    background-color: @textColor;
+    color: @darkTextColor;
+    border: 2px solid @darkTextColor;
+    border-radius: 5%;
+}
+
+Formelsammlung QListView::item:hover{
+    background-color: @warmContrastColor;
+}
+
+Formelsammlung QListView::item:selected{
+    border: 2px solid @warmDarkContrastColor;
+    background-color: @warmDarkContrastColor;
+    color: @textColor;
+}
+
+/*----------------------
+*>Tiles
+----------------------*/
+CreateCollectionDialog QPushButton#createColColorBtn{
+    background-color: black;
+}

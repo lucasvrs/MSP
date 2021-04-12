@@ -11,7 +11,7 @@ public:
     explicit ContentsWidget(QWidget *parent = nullptr);
 
 signals:
-
+    void showOptions();
 };
 
 #endif // CONTENTSWIDGET_H

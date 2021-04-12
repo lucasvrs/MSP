@@ -435,16 +435,63 @@ public:
         }
         return QDomNode();
     }
-    /*! Removes element out of document
-     * \brief removeElement
-     * \param tagName - tag name of element
-     */
-    void removeElement(const QString& tagName)
+    void removeElement(const QString& attribute, const QString& tagname, const QString& parent)
     {
-        if(find(tagName))
+        QDomNodeList localChildNodes = m_doc->childNodes();
+        QDomNodeList localChildNodes1;
+        for(int i = 0; i < localChildNodes.length(); i++)
         {
-            m_doc->removeChild(getElementByTagName(tagName));
+           if(localChildNodes.at(i).nodeName() == parent)
+           {
+               localChildNodes1 = localChildNodes.at(i).childNodes();
+           }
         }
+        for(int i = 0; i < localChildNodes1.length(); i++)
+        {
+           if(localChildNodes1.at(i).nodeName() == tagname)
+           {
+               localChildNodes = localChildNodes1.at(i).childNodes();
+           }
+        }
+        for(int i = 0; i < localChildNodes.length(); i++)
+        {
+          QDomNode node = localChildNodes.at(i);
+
+          if(node.toElement().attribute("name") == attribute)
+          {
+             node.parentNode().removeChild(node);
+          }
+        }
+        saveXML();
+    }
+    bool removeElement(const QString& name, const QString& attr, const int value)
+    {
+        return (!crawlNodeList(m_doc->childNodes(), name, attr, value).isNull());
+    }
+    QDomElement crawlNodeList(const QDomNodeList& list, const QString& name, const QString& attr, const int value)
+    {
+        for(int i = 0; i < list.size(); i++)
+        {
+            QDomElement e = list.at(i).toElement();
+            if(e.tagName() == name && e.attributes().contains(attr))
+            {
+                if(e.attribute(attr).toInt() == value)
+                {
+                    e.parentNode().removeChild(e);
+                    return e;
+                }
+            }
+            if(!e.childNodes().isEmpty())
+            {
+                QDomElement cE = crawlNodeList(e.childNodes(), name, attr, value);
+                if(!cE.isNull())
+                {
+                    cE.parentNode().removeChild(cE);
+                    return cE;
+                }
+            }
+        }
+        return QDomElement();
     }
     /*! Saves document to xml
      * \brief saveXML
@@ -458,6 +505,10 @@ public:
         QTextStream stream( m_file );
         stream << m_doc->toString();
         m_file->close();
+    }
+    QDomElement* getRootElement() const
+    {
+        return m_rootElement;
     }
 
 private:

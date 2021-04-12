@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "headerwidget.h"
 #include <QLabel>
 #include <QHBoxLayout>
@@ -7,6 +13,8 @@ HeaderWidget::HeaderWidget(QWidget *parent) : QWidget(parent)
 {
     //defines layout
     QHBoxLayout* layout = new QHBoxLayout(this);
+    layout->setMargin(0);
+    layout->setSpacing(0);
     m_headerLabel = new QLabel("Contents");
     QPushButton* optionsBtn = new QPushButton("Options");
     QSpacerItem* hSpacerL = new QSpacerItem(50, 10, QSizePolicy::Expanding, QSizePolicy::Minimum);
@@ -15,6 +23,10 @@ HeaderWidget::HeaderWidget(QWidget *parent) : QWidget(parent)
     layout->addWidget(m_headerLabel);
     layout->addItem(hSpacerR);
     layout->addWidget(optionsBtn);
+    connect(optionsBtn, &QPushButton::clicked, [this]()
+    {
+        emit showOptions();
+    });
 }
 
 /*! Sets text of header label

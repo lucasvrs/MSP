@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+class TileItem;
+
 class HomeWidget : public QWidget
 {
     Q_OBJECT
@@ -13,7 +15,7 @@ public:
 private:
 
 signals:
-    void showSubject(const QString& title);
+    void showSubject(const QString& title, QList<TileItem*> list);
 };
 
 #endif // HOMEWIDGET_H

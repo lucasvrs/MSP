@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formelSammlung>
+  <pythagoras>
+    <formel name="Kathetensatz">
+	   <name>a² = c * p</name>
+     </formel>
+    <formel name="Höhensatz">
+	   <name>h² = p * q</name>
+     </formel>
+    <formel name="Satz des Pythagoras">
+	   <name>h² = p * q</name>
+     </formel> 	 
+  </pythagoras>
+  <trigonometrie>
+    <formel name="Winkelfunktion">
+	   <name>sin(a) = Gegenkathete/Hypotenuse
+	   cos(a) = Ankathete/Hypotenuse
+	   tan(a) = Gegenkathete/Ankathete	   
+	   </name>
+     </formel>
+    <formel name="Sinussatz">
+	   <name>a/sin(alpha) = b/sin(beta) = c/sin(gamma)</name>
+     </formel>
+    <formel name="Kosinussatz">
+	   <name>a² = b² + c² - 2 * b * c * cos(a)</name>
+     </formel> 	 
+  </trigonometrie>
+   <masseEinesKörpers>
+    <formel name="Masse">
+	   <name>m = V * p</name>
+     </formel> 	 
+  </masseEinesKörpers>
+  <prozentrechnung>
+    <formel name="Prozentrechnung">
+	   <name> W = G * p/100</name>
+     </formel>
+    <formel name="Prozentzahl">
+	   <name>p = W/G * 100</name>
+     </formel>
+    <formel name="Grundwert">
+	   <name>G = W * 100/p</name>
+     </formel> 	 
+  </prozentrechnung>
+    <zinsrechnung>
+    <formel name="Jahreszinsen">
+	   <name> Z = K * p/100</name>
+     </formel>
+    <formel name="Monatszinsen">
+	   <name>Zm = K * p/100 * m/12</name>
+     </formel>
+    <formel name="Tageszinsen">
+	   <name>Zt = K * p/100 * t/360</name>
+     </formel> 	 
+  </zinsrechnung>
+  <binomischeFormel>
+    <formel name="Binomische Formel">
+	   <name> (a+b)² = a² + 2ab + b² 
+	     (a-b)² = a² - 2ab + b²
+		 (a+b) * (a-b)= a² - b²
+	   </name>
+     </formel>
+  </binomischeFormel>
+  <körper>
+    <formel name="Würfel">
+	   <name> V = a³  O = 6*a²</name>
+     </formel>
+    <formel name="Quader">
+	   <name>V = a*b*c   O=2*(a*b+b*c+a*c)</name>
+     </formel>
+    <formel name="Zylinder">
+	   <name>V = π * r² * k  M = π*d*k  O = 2*π*r*(r+k)</name>
+     </formel>
+     <formel name="Pyramide">
+	   <name>V = 1/3*G*k  O =G*M</name>
+     </formel>
+     <formel name="Kegel">
+	   <name>V = 1/3*G*k  M = π*r*s  O = π*r*(r+s)</name>
+     </formel>
+     <formel name="Kugel">
+	   <name>V = 4/3*π*r³ O = 4*π*r</name>
+     </formel> 	 
+  </körper>
+    <figuren>
+    <formel name="Dreieck">
+	   <name> A = 1/2*a*b*sin(γ)  u=g+a+b</name>
+     </formel>
+    <formel name="Quadrat">
+	   <name>A = a²   u = 4*a</name>
+     </formel>
+    <formel name="Rechteck">
+	   <name>A = a*b u=2*a+2*b</name>
+     </formel>
+     <formel name="Raute">
+	   <name>A = g*h  u = 4*g</name>
+     </formel>
+     <formel name="Parallelogramm">
+	   <name>A=g*h  u=2*g+2*b</name>
+     </formel>
+     <formel name="Trapez">
+	   <name>A=m*h u=a+b+c+d</name>
+     </formel>
+     <formel name="Drachenviereck">
+	   <name>A=e*f/2 u=2*a+2*b</name>
+     </formel>
+     <formel name="Kreis">
+	   <name>A=π*r² u=2*π*r</name>
+     </formel> 	 
+  </figuren>
+  
+</formelSammlung>

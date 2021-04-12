@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "daydetailsbgwidget.h"
 #include "daydetailsgroupbox.h"
 #include <QGraphicsOpacityEffect>
@@ -9,7 +15,6 @@
 DayDetailsBgWidget::DayDetailsBgWidget(const QDate& date, QWidget *parent) : QWidget(parent)
 {
     setAttribute(Qt::WA_StyledBackground, true);
-    setStyleSheet("DayDetailsBgWidget{background-color: rgba(0, 0, 0, 150);}");
 
     //define layout
     QGridLayout* layout = new QGridLayout(this);

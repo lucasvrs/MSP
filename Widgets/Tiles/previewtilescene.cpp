@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "previewtilescene.h"
 #include "tileconstants.h"
 #include "tileitem.h"
@@ -50,7 +56,7 @@ void PreviewTileScene::addItems()
     addItem(addTile);
 }
 
-/*! Deletes all items from scene
+/*! Removes all items from scene
  * \brief TileScene::deleteItems
  */
 void PreviewTileScene::deleteItems()
@@ -78,7 +84,7 @@ void PreviewTileScene::updateScene(double w)
         fac++;
     }
     m_height = fac * m_tileLength + (fac + 2) * SPACING;
-    setSceneRect(QRectF(-w/2 - m_tileLength / 2 - (SPACING - 5), m_tileLength/2, w, m_height));
+    setSceneRect(QRectF(-w/2 - m_tileLength / 2 - (SPACING + 5), m_tileLength/2, w, m_height));
 }
 
 //EVENTS**************************************************************************************

@@ -16,7 +16,7 @@ private:
     InterfaceOptionsWidget* m_interface;
 
 signals:
-
+    void closeOptions();
 };
 
 #endif // OPTIONSWIDGET_H

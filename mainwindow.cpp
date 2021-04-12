@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Widgets/mspwidget.h"
@@ -14,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     setStyleSheet(readStylesheet("./../FinalMsp/Styling/lightmode.qss"));
 
     QVBoxLayout* layout = new QVBoxLayout(ui->centralwidget);
-    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setMargin(0);
     layout->setSpacing(0);
     MspWidget* msp = new MspWidget;
     layout->addWidget(msp);

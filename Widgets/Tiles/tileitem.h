@@ -14,19 +14,25 @@ public:
     void setWidth(double w);
     void setText(const QString& text);
     void setWidget(QWidget* widget);
+    void setId(int id);
+    void setPreviews(QList<TileItem*> previews);
     const QString& text() const;
     double height() const;
     double width() const;
+    QList<TileItem*> previews() const;
     QWidget* widget() const;
     QRectF boundingRect() const override;
+    int id() const;
 
 private:
+    int m_id;
     double m_height;
     double m_width;
     QColor m_color;
     QColor m_textColor;
     QString m_text;
     QWidget* m_widget;
+    QList<TileItem*> m_previews;
 };
 
 #endif // TILEITEM_H

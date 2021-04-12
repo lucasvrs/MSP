@@ -2,8 +2,10 @@
 #define SUBJECTSTARTMENU_H
 
 #include <QWidget>
+#include "Widgets/Tiles/tileitem.h"
 
 class QLabel;
+class SideMenuTilesView;
 
 class SubjectStartMenu : public QWidget
 {
@@ -13,11 +15,14 @@ public:
 
 private:
     QLabel* m_title;
+    SideMenuTilesView* m_appMenu;
 
 signals:
+    void showWidget(QWidget* w);
 
 public slots:
     void setTitle(const QString& title);
+    void setPreviews(QList<TileItem*> previews);
 };
 
 #endif // SUBJECTSTARTMENU_H

@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+ *>----------------------------------------------------------------------------------------------------<
+ * Written by Luca Sievers
+ *>----------------------------------------------------------------------------------------------------<
+ ******************************************************************************************************/
+
 #include "contentswidget.h"
 #include "headerwidget.h"
 #include "mainviewwidget.h"
@@ -9,6 +15,8 @@ ContentsWidget::ContentsWidget(QWidget *parent) : QWidget(parent)
 {
     //defines layout
     QHBoxLayout* layout = new QHBoxLayout(this);
+    layout->setMargin(0);
+    layout->setSpacing(0);
     QVBoxLayout* contentsLayout = new QVBoxLayout;
     NavigationWidget* nav = new NavigationWidget;
     HeaderWidget* header = new HeaderWidget;
@@ -24,4 +32,5 @@ ContentsWidget::ContentsWidget(QWidget *parent) : QWidget(parent)
         main->setCurrentIndex(page.page);
         header->setHeader(page.title);
     });
+    connect(header, &HeaderWidget::showOptions, this, &ContentsWidget::showOptions);
 }
