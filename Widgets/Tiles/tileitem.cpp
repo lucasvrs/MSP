@@ -6,10 +6,17 @@
 
 #include "tileitem.h"
 #include <QPainter>
+#include <QCursor>
 
-TileItem::TileItem(QGraphicsItem* parent) : QGraphicsItem(parent),  m_id(-1), m_height(100), m_width(100), m_widget(nullptr)
+TileItem::TileItem(QGraphicsItem* parent) :
+    QGraphicsItem(parent),
+    m_id(-1),
+    m_height(100),
+    m_width(100),
+    m_widget(nullptr)
 {
     setFlag(QGraphicsItem::ItemIsSelectable, true);
+    setAcceptHoverEvents(true);
 }
 
 void TileItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
@@ -26,7 +33,15 @@ void TileItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
     QFontMetrics m(f);
     pen.setColor(m_textColor);
     painter->setPen(pen);
-    if(!m_text.isEmpty()) painter->drawText(QPointF(-m.width(m_text)/3, 0), m_text);
+    if(!m_text.isEmpty() && m.width(m_text) < m_width - 2)
+    {
+        setToolTip("");
+        painter->drawText(QPointF(-m.width(m_text)/3, 0), m_text);
+    }
+    else
+    {
+        setToolTip(m_text);
+    }
 }
 
 int TileItem::id() const
@@ -102,4 +117,17 @@ QWidget* TileItem::widget() const
 QList<TileItem*> TileItem::previews() const
 {
     return m_previews;
+}
+
+//EVENTS*******************************************************************************************
+void TileItem::hoverEnterEvent(QGraphicsSceneHoverEvent* e)
+{
+    setCursor(Qt::PointingHandCursor);
+    QGraphicsItem::hoverEnterEvent(e);
+}
+
+void TileItem::hoverLeaveEvent(QGraphicsSceneHoverEvent* e)
+{
+    setCursor(Qt::ArrowCursor);
+    QGraphicsItem::hoverLeaveEvent(e);
 }

@@ -358,6 +358,56 @@ public:
     {
         return m_doc->createElement(tagName);
     }
+    QDomElement getElement(const QString& tagName, const QString& attr, int value)
+    {
+        QDomNodeList list = m_doc->elementsByTagName(tagName);
+        for(int i = 0; i < list.size(); i++)
+        {
+            if(list.at(i).toElement().attribute(attr).toInt() == value)
+            {
+                return list.at(i).toElement();
+            }
+        }
+        return QDomElement();
+    }
+    QDomElement getTileElement(const QDomElement& parent, const QString& tagName, const QString& text, const QString& attr, int value)
+    {
+        QDomNodeList list = m_doc->elementsByTagName(tagName);
+        for(int i = 0; i < list.size(); i++)
+        {
+            QDomElement e = list.at(i).toElement();
+            if(e.attribute(attr).toInt() == value && e.parentNode().parentNode() == parent && e.text() == text)
+            {
+                return e;
+            }
+        }
+        return QDomElement();
+    }
+    QDomElement getElementUnderRoot(const QString& name, const QString& attr, int attrV)
+    {
+        QDomElement e = m_rootElement->firstChild().toElement();
+        while(!e.isNull())
+        {
+            if(e.tagName() == name && e.attribute(attr).toInt() == attrV)
+            {
+                return e;
+            }
+            e = e.nextSibling().toElement();
+        }
+        return QDomElement();
+    }
+    QDomElement getElementUnderElement(const QDomElement& e, const QString& tagName)
+    {
+        QDomNodeList list = e.childNodes();
+        for(int i = 0; i < list.size(); i++)
+        {
+            if(list.at(i).toElement().tagName() == tagName)
+            {
+                return list.at(i).toElement();
+            }
+        }
+        return QDomElement();
+    }
     /*! Returns element having passed tag name and id value
      * \brief getElementByAttribute
      * \param tagName   - tag name of the element
@@ -376,7 +426,7 @@ public:
         }
         return QDomNode();
     }
-    /*! Returns element having passed tag name
+    /*! Returns first element having passed tag name
      * \brief getElementByTagName
      * \param tagName - tag name of the element
      * \return QDomElement
@@ -464,10 +514,29 @@ public:
         }
         saveXML();
     }
+    void removeElement(const QDomNode& e)
+    {
+        e.parentNode().removeChild(e);
+    };
+    /*! Removes first element with the corrosponding tagname, attribute and value
+     * \brief removeElement
+     * \param name  - tag name
+     * \param attr  - attribute name
+     * \param value - attribute value
+     * \return Returns if an element got removed
+     */
     bool removeElement(const QString& name, const QString& attr, const int value)
     {
         return (!crawlNodeList(m_doc->childNodes(), name, attr, value).isNull());
     }
+    /*! Crawls through all nodes of a list including all their children
+     * \brief crawlNodeList
+     * \param list  - list of nodes
+     * \param name  - tag name searched for
+     * \param attr  - attribute name searched for
+     * \param value - attribute value searched for
+     * \return Returns the element that got removed. If no fitting node was found, the function returns an null element.
+     */
     QDomElement crawlNodeList(const QDomNodeList& list, const QString& name, const QString& attr, const int value)
     {
         for(int i = 0; i < list.size(); i++)

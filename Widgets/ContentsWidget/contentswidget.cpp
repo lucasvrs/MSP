@@ -31,6 +31,19 @@ ContentsWidget::ContentsWidget(QWidget *parent) : QWidget(parent)
     {
         main->setCurrentIndex(page.page);
         header->setHeader(page.title);
+        header->disablePrev();
     });
     connect(header, &HeaderWidget::showOptions, this, &ContentsWidget::showOptions);
+    connect(main, &MainViewWidget::newTitle, [header](const QString& title)
+    {
+        header->setHeader(title);
+    });
+    connect(main, &MainViewWidget::setPrevWidget, [header](QWidget* w)
+    {
+        header->setPrevWidget(w);
+    });
+    connect(header, &HeaderWidget::showWidget, [main](QWidget* w)
+    {
+        main->setCurrentWidget(w);
+    });
 }

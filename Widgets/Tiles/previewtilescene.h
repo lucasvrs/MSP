@@ -15,6 +15,7 @@ public:
     PreviewTileScene(QObject* parent = nullptr);
 
 private:
+    const short m_cols = 6;
     double m_width;
     double m_height;
     double m_tileLength;

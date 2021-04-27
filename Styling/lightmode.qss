@@ -15,6 +15,10 @@ QPushButton:hover{
     background-color: @sideMenuHoverColor;
 }
 
+QPushButton:disabled{
+    background-color: gray;
+}
+
 QPushButton#navbtn{
     background-color: @sideMenuColor;
 }
@@ -49,7 +53,14 @@ DayGroupBox QLabel{
 *********************************************************/
 
 /*----------------------
-*>CalculatorWidget
+*>ContentsWidget
+----------------------*/
+HeaderWidget QLabel{
+    font-size: 25px;
+}
+
+/*----------------------
+*>NavigationWidget
 ----------------------*/
 NavigationWidget{
 
@@ -175,7 +186,7 @@ DayGroupBox#otherMonth:hover{
     background-color: @warmDarkContrastColor;
 }
 
-DayGroupBox#otherMonth{
+DayGroupBox#otherMonth QLabel{
     color: @darkTextColor;
 }
 
@@ -247,4 +258,26 @@ Formelsammlung QListView::item:selected{
 ----------------------*/
 CreateCollectionDialog QPushButton#createColColorBtn{
     background-color: black;
+}
+
+/*----------------------
+*>Help Widgets
+----------------------*/
+WidgetItem{
+    background-color: @textColor;
+    border: 2px solid @darkTextColor;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+WidgetItem:hover{
+    background-color: @warmContrastColor;
+}
+
+WidgetItem:hover{
+    background-color: @warmContrastColor;
+}
+
+WidgetItem QWidget{
+    background-color: rgba(255, 255, 255, 0);
 }

@@ -6,6 +6,13 @@
 
 #include "calculator.h"
 
+/*! Performs every operation the calculator class has
+ * \brief Calculator::action
+ * \param op    - Operator
+ * \param a     - first value
+ * \param b     - second value
+ * \return result
+ */
 double Calculator::action(Calculator::Operator op, double a, double b)
 {
     return (this->*m_functions[op])(a, b);

@@ -33,6 +33,7 @@ CalculatorWidget::CalculatorWidget(QWidget *parent) : QWidget(parent)
         if(i%3 == 0) row++;
         QPushButton* btn = new QPushButton(QString::number(i + 1));
         btn->setObjectName("numberBtn");
+        m_numbers.append(btn);
         layout->addWidget(btn, row, (i + 1) - (3 * (row - 3)));
         connect(btn, &QPushButton::clicked, [this, btn]()
         {
@@ -43,6 +44,7 @@ CalculatorWidget::CalculatorWidget(QWidget *parent) : QWidget(parent)
     clearBtn->setObjectName("highlightBtn");
     QPushButton* zeroBtn = new QPushButton("0");
     zeroBtn->setObjectName("numberBtn");
+    m_numbers.append(zeroBtn);
     QPushButton* commaBtn = new QPushButton(".");
     connect(commaBtn, &QPushButton::clicked, [this, commaBtn]()
     {
@@ -145,6 +147,7 @@ void CalculatorWidget::addOperator(const QString& o)
 void CalculatorWidget::calcResult()
 {
     QString text = m_edit->text();
+    if(text[0] == "-") text.prepend("0");
     if(text.isEmpty()) return;
     for(int i = 0; i < Calculator::Operators; i++)
     {
@@ -153,10 +156,12 @@ void CalculatorWidget::calcResult()
             return;
         }
     }
-    QRegExp numberSep("[(*|/|-|+|^|mod)]");
+    QRegExp numberSep("[*/-+^mod]");
     QRegExp operatorSep("[0-9.]");
     QStringList operators = text.split(operatorSep, QString::SkipEmptyParts);
     QStringList numbers = text.split(numberSep, QString::SkipEmptyParts);
+    qDebug() << operators;
+    qDebug() << numbers;
     bool found = false;
     int startPrio = 3;
     if(operators.isEmpty()) return;

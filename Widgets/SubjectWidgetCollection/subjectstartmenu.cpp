@@ -6,6 +6,7 @@
 
 #include "subjectstartmenu.h"
 #include "Widgets/Tiles/sidemenutilesview.h"
+#include "Widgets/Tiles/tileitem.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -36,15 +37,22 @@ SubjectStartMenu::SubjectStartMenu(QWidget *parent) : QWidget(parent)
 
     //connects
     connect(m_appMenu, &SideMenuTilesView::showWidget, this, &SubjectStartMenu::showWidget);
+    connect(m_appMenu, &SideMenuTilesView::addTile, this, &SubjectStartMenu::addTile);
 }
 
 //SLOTS**********************************************************
 void SubjectStartMenu::setTitle(const QString& title)
 {
     m_title->setText(title);
+    m_appMenu->setTitle(title);
 }
 
 void SubjectStartMenu::setPreviews(QList<TileItem*> previews)
 {
     m_appMenu->setPreview(previews);
+}
+
+void SubjectStartMenu::setId(int id)
+{
+    m_appMenu->setId(id);
 }

@@ -6,6 +6,7 @@
 
 #include "sidemenutilesview.h"
 #include "sidemenutilescene.h"
+#include "tileitem.h"
 #include <QDebug>
 
 SideMenuTilesView::SideMenuTilesView(QWidget *parent) : QGraphicsView(parent)
@@ -16,10 +17,11 @@ SideMenuTilesView::SideMenuTilesView(QWidget *parent) : QGraphicsView(parent)
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-    setFixedWidth(100);
+    setFixedWidth(200);
 
     //connects
     connect(m_scene, &SideMenuTileScene::showWidget, this, &SideMenuTilesView::showWidget);
+    connect(m_scene, &SideMenuTileScene::addTile, this, &SideMenuTilesView::addTile);
 }
 
 //EVENTS********************************************************
@@ -39,4 +41,14 @@ void SideMenuTilesView::scrollContentsBy(int, int v)
 void SideMenuTilesView::setPreview(QList<TileItem*> previews)
 {
     m_scene->setPreview(previews);
+}
+
+void SideMenuTilesView::setTitle(const QString& title)
+{
+    m_scene->setTitle(title);
+}
+
+void SideMenuTilesView::setId(int id)
+{
+    m_scene->setId(id);
 }

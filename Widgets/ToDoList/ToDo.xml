@@ -1,10 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <toDo>
  <pending>
-  <task name="Klaus der Huso">
-   <date>16.03.2021</date>
-   <prio>Mittel</prio>
-  </task>
   <task name="Was">
    <date>16.03.2021</date>
    <prio>Hoch</prio>
@@ -15,17 +11,9 @@
    <date>15.03.2021</date>
    <prio>Niedrig</prio>
   </task>
-  <task name="Pls du Huso Klaus">
-   <date>17.01.1899</date>
-   <prio>Mittel</prio>
-  </task>
   <task name="fggfgh">
    <date>08.04.2021</date>
    <prio>Niedrig</prio>
-  </task>
-  <task name="Wichser">
-   <date>06.01.2000</date>
-   <prio>Hoch</prio>
   </task>
   <task name="KK13">
    <date>13.03.1999</date>

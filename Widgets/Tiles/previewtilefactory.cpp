@@ -20,10 +20,12 @@ PreviewTileFactory::PreviewTileFactory()
 QList<TileItem*> PreviewTileFactory::previewTiles()
 {
     QList<TileItem*> tiles;
+    int counter = -1;
     for(QDomElement e : *m_reader->allElemsUnderRoot())
     {
         TileItem* tile = new TileItem;
         tile->setText(e.tagName());
+        tile->setId(counter);
         tile->setWidget(m_factory->findWidget(e.tagName()));
         QDomElement color = m_reader->findElemUnderElem(e, "color");
         QList<QDomElement> values = *m_reader->allElemsUnderElem(color);
@@ -32,17 +34,20 @@ QList<TileItem*> PreviewTileFactory::previewTiles()
         values = *m_reader->allElemsUnderElem(textColor);
         tile->setTextColor(QColor(values[0].text().toInt(), values[1].text().toInt(), values[2].text().toInt(), values[3].text().toInt()));
         tiles.append(tile);
+        counter--;
     }
     return tiles;
 }
 
 TileItem* PreviewTileFactory::tile(const QString& tagName)
 {
+    int counter = -1;
     for(QDomElement e : *m_reader->allElemsUnderRoot())
     {
         if(e.tagName() == tagName)
         {
             TileItem* tile = new TileItem;
+            tile->setId(counter);
             tile->setText(e.tagName());
             tile->setWidget(m_factory->findWidget(e.tagName()));
             QDomElement color = m_reader->findElemUnderElem(e, "color");
@@ -53,6 +58,7 @@ TileItem* PreviewTileFactory::tile(const QString& tagName)
             tile->setTextColor(QColor(values[0].text().toInt(), values[1].text().toInt(), values[2].text().toInt(), values[3].text().toInt()));
             return tile;
         }
+        counter--;
     }
     return nullptr;
 }

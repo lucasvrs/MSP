@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<help>
+ <data>
+  <widget name="Todo List">
+   <picture>:/help/Widgets/Help/beispiel.PNG</picture>
+   <description>Mit der ToDo-Liste behältst du den Überblick über deine Aufgaben, die du noch erledigen musst und hast auch auf einen Blick, was wann erledigt werden muss.
+</description>
+    <functionality>
+    Klicke auf „ADD“ um einen neuen Eintrag zu erstellen.
+    Drücke auf „DELETE“ um einen Eintrag zu löschen und „DONE“ um eine abgeschlossene Aufgabe in die Done-Liste zu legen.
+    Mit Hilfe der Sort-Combobox, kannst du alphabetisch, nach Priorität oder auch nach Abschlusszeit sortieren.
+    </functionality>
+    <shortcuts>
+        <shortcut>
+            <primary>A</primary>
+            <function>mini</function>
+        </shortcut>
+        <shortcut>
+            <primary>B</primary>
+            <function>maxi</function>
+        </shortcut>
+        <shortcut>
+            <primary>C</primary>
+            <function>delete</function>
+        </shortcut>
+    </shortcuts>
+    </widget>
+  <widget name="Formula Collection">
+   <picture>.//..//ScrollAreaTest//beispiel.PNG</picture>
+   <description>
+   Mit der Formelsammlung hast du alle Formeln auf einen Blick verfügbar.
+   Mit Hilfe der Suchfunktion findest du deine gesuchte Formel.
+</description>
+   <functionality>
+  Scroll einfach durch die Liste oder nutze das Suchfeld um deine gesuchte Formel zu finden.
+</functionality>
+<shortcuts>
+    <shortcut>
+        <primary>A</primary>
+        <function>mini</function>
+    </shortcut>
+</shortcuts>  </widget>
+  <widget name="Homework List">
+   <picture>.//..//ScrollAreaTest//beispiel.PNG</picture>
+   <description>Mit der Hausaufgabenliste behältst du den Überblick über deine Hausaufgaben, die du noch erledigen musst und hast auch auf einen Blick, was wann erledigt werden muss.
+</description>
+   <functionality>
+   Klicke auf „ADD“ um einen neuen Eintrag zu erstellen.
+   Drücke auf „DELETE“ um einen Eintrag zu löschen.
+   Mit Hilfe der Fächer-Combobox, kannst du dir die Hausaufgaben fächerspezifisch anzeigen lassen.
+</functionality>
+<shortcuts>
+    <shortcut>
+        <primary>A</primary>
+        <function>mini</function>
+    </shortcut>
+</shortcuts>  </widget>
+  <widget name="Matrix Calculator">
+   <picture>.//..//ScrollAreaTest//beispiel.PNG</picture>
+   <description>Er soll dir dabei helfen komplizierte Matrizen miteinander zu multiplizieren, addieren oder subtrahieren.
+   Zudem kann er fürdich die Determinante ausrechnen, die Kehrmatrix bilden, die Matrix potenzieren, mit einer bestimmten Zahl multiplizieren, eine Matrix transponieren oder den Rang der Matrix bestimmen.
+</description>
+   <functionality>
+   Zuallererst musst du die richtige Größe für deineMatrix finden, dies kannst du mithilfe der „+“ und „-“ Zeichen machen, welche du unter den Matrix-Feldern finden kannst.
+    Als nächstes füllst du die Matrix-Felder mit Zahlen. Willst du zwei Matrizen multiplizieren, addieren oder subtrahieren, dann kannst du dies, nachdem du die Felder beider Matrizen mit Zahlen befüllt hast, mit den Buttons zwischen den beiden Matrizen machen.
+    „Determinate“ gibt dir die Determinante für die Matrix darüber wieder.
+    „Rank“ gibt dir den Rang der Matrix aus.
+    „Kehrmatrix“ gibt dir die Kehrmatrix aus.
+    „Transponieren“ transponiert die Matrix für dich.
+    Bei „Multiplicate with“ musst du noch zusätzlich die gewünschte Zahl, mit der die Matrix multipliziert werden muss, angegeben werden.
+    Für „Pow with“ gilt dasselbe, hierbei wird dann die Matrix mit deiner gewählten Potenz potenziert.
+</functionality>
+<shortcuts>
+    <shortcut>
+        <primary>A</primary>
+        <function>mini</function>
+    </shortcut>
+</shortcuts>  </widget>
+  <widget name="Pathfinding">
+   <picture>.//..//ScrollAreaTest//beispiel.PNG</picture>
+   <description>Das Pathfinding-Tool, visualisiert dir den Ablauf des A*Algorithmus in einem vorgegebenen Gitter.
+</description>
+   <functionality>
+   Wähle den Start –und Anfangspunkt für den Algorithmus aus.
+   Wenn du möchtest, kannst du noch Hindernisse in das Gitter einfügen, welche der Algorithmus umgehen muss.Drücke nun auf Start und der Algorithmus versucht den kürzesten Weg zum Ziel zu finden.
+</functionality>
+<shortcuts>
+    <shortcut>
+        <primary>A</primary>
+        <function>mini</function>
+    </shortcut>
+</shortcuts>  </widget>
+  <widget name="Mental Arithmetic">
+   <picture>.//..//ScrollAreaTest//beispiel.PNG</picture>
+   <description>Es testet deine Kopfrechnen Fähigkeit und soll diese auch verbessern.
+</description>
+   <functionality>
+   Du kannst am Anfang zwischen Multiplikation/Division, Addition/Subtraktion auswählen, als auch den jeweiligen Schwierigkeitsgrad.
+   Deine Aufgabe ist es, dann das richtige Ergebnis einzugeben.
+</functionality>
+<shortcuts>
+    <shortcut>
+        <primary>A</primary>
+        <function>mini</function>
+    </shortcut>
+</shortcuts>  </widget>
+  <widget name="Converter">
+   <picture>.//..//ScrollAreaTest//beispiel.PNG</picture>
+   <description>Der Converter, soll dir dabei helfen Maßeinheiten in andere Maßen umzurechnen.
+</description>
+   <functionality>
+Wähle deine gesuchte Maßeinheit über die Combobox aus und wähle dann die gewünschte Ziel-und Ausgangsgröße aus und schon rechnet der Converter deine ausgewählte Größe in die gewünschte Zielgröße um.
+</functionality>
+<shortcuts>
+    <shortcut>
+        <primary>A</primary>
+        <function>mini</function>
+    </shortcut>
+</shortcuts>
+</widget>
+  <widget name="Vocabulary Trainer">
+   <picture>.//..//ScrollAreaTest//beispiel.PNG</picture>
+   <description>Es testet dein Vokabelwissen und ordnet richtige Vokabeln, je nach Wissenstand, einem Wissenslevel zu.
+   Somit verbesserst du bei regelmäßigem Gebrauch dein Wortschatz.
+</description>
+   <functionality>
+   Wähle zwischen deiner Ziel-und Ursprungssprach und drücke auf Start und schon kann es losgehen.
+</functionality>
+   <shortcuts>
+       <shortcut>
+           <primary>A</primary>
+           <function>mini</function>
+       </shortcut>
+   </shortcuts>
+  </widget>
+ </data>
+</help>

@@ -43,7 +43,6 @@ bool hasLineCircleIntersection(const LineSegment& seg, const Circle& c, Vec& ip)
 {
     Vec d = seg.dir();
     double disSegment = d.lengthSqrd();
-    //double D = (seg.p0 - c.p ^ seg.p1 - c.p).z();
     Vec xVec = (seg.p0 - c.p);
     Vec yVec = (seg.p1 - c.p);
     double D = xVec.x() * yVec.y() - xVec.y() * yVec.x();
@@ -66,7 +65,5 @@ bool hasLineCircleIntersection(const LineSegment& seg, const Circle& c, Vec& ip)
     ip = nearestPoint(seg.p0, ip1, ip2);
     double t = d * (ip1 - seg.p0) / disSegment;
     if(t < 0) return false;
-    //t[1] = d * (ip[1] - ls.p0) / disSegment;
-
     return true;
 }

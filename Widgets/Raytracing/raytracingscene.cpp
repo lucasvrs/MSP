@@ -1,6 +1,7 @@
 #include "raytracingscene.h"
 #include <QGraphicsEllipseItem>
 #include <QGraphicsLineItem>
+#include <QKeyEvent>
 #include <QDebug>
 #include "Utils/utils.h"
 #include "Utils/geometrylib.h"

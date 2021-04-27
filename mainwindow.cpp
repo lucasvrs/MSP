@@ -24,6 +24,23 @@ MainWindow::MainWindow(QWidget *parent)
     layout->setSpacing(0);
     MspWidget* msp = new MspWidget;
     layout->addWidget(msp);
+
+    //connects
+    connect(msp, &MspWidget::changeStyle, [this](int mode)
+    {
+        switch(mode)
+        {
+        case 0:
+            setStyleSheet(readStylesheet("./../FinalMsp/Styling/lightmode.qss"));
+            break;
+        case 1:
+            setStyleSheet(readStylesheet("./../FinalMsp/Styling/darkmode.qss"));
+            break;
+        default:
+            setStyleSheet(readStylesheet("./../FinalMsp/Styling/lightmode.qss"));
+            break;
+        }
+    });
 }
 
 MainWindow::~MainWindow()

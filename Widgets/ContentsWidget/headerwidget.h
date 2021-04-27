@@ -4,6 +4,7 @@
 #include <QWidget>
 
 class QLabel;
+class QPushButton;
 
 class HeaderWidget : public QWidget
 {
@@ -14,12 +15,17 @@ public:
 
 private:
     QLabel* m_headerLabel;
+    QWidget* m_prevWidget;
+    QPushButton* m_prevBtn;
 
 signals:
     void showOptions();
+    void showWidget(QWidget* w);
 
 public slots:
     void setHeader(const QString& title);
+    void setPrevWidget(QWidget* w);
+    void disablePrev();
 };
 
 #endif // HEADERWIDGET_H

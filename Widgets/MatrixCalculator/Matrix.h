@@ -351,41 +351,41 @@ template<typename T> extern double det(const Matrix<T>& m, int n)
     double deter = 0;
     if(r == c)
     {
-    auto hlpmat = Matrix<double>(10,10);
-    if(n == 2)
-    {
-        return ((m[0][0] * m[1][1]) - (m[1][0] * m[0][1]));
-    }
-    else
-    {
-        for(int a = 0; a < n; a++)
+        auto hlpmat = Matrix<double>(10,10);
+        if(n == 2)
         {
+            return ((m[0][0] * m[1][1]) - (m[1][0] * m[0][1]));
+        }
+        else
+        {
+            for(int a = 0; a < n; a++)
+            {
 
-          int hlpi = 0;
+              int hlpi = 0;
 
-          for(int i = 1; i < n; i++)
-          {
-
-              int hlpj = 0;
-
-              for(int j = 0; j < n; j++)
+              for(int i = 1; i < n; i++)
               {
 
-                  if(j == a)
-                  {
-                      continue;
-                  }
+                  int hlpj = 0;
 
-                  hlpmat[hlpi][hlpj] = m[i][j];
-                  hlpj++;
+                  for(int j = 0; j < n; j++)
+                  {
+
+                      if(j == a)
+                      {
+                          continue;
+                      }
+
+                      hlpmat[hlpi][hlpj] = m[i][j];
+                      hlpj++;
+                  }
+                hlpi++;
               }
-            hlpi++;
-          }
-        deter = deter + (pow(-1,a) * m[0][a] * det(hlpmat,n-1));
+            deter = deter + (pow(-1,a) * m[0][a] * det(hlpmat,n-1));
+            }
         }
+        return deter;
     }
-    return deter;
-  }
 }
 
 template<typename T> extern double rank(Matrix<T>& m)

@@ -15,7 +15,7 @@
 #include <QDebug>
 #include <QMenu>
 
-TileScene::TileScene(QObject *parent) : QGraphicsScene(parent), m_dialog(nullptr)
+TileScene::TileScene(QObject *parent) : QGraphicsScene(parent), m_dialog(nullptr), m_lastId(-1)
 {
     m_factory = new TileFactory;
 }
@@ -121,7 +121,8 @@ void TileScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* e)
             }
             else
             {
-                emit showSubject(tile->text(), tile->previews());
+                m_lastId = tile->id();
+                emit showSubject(tile->text(), tile->previews(), tile->id());
             }
         }
     }
@@ -149,4 +150,17 @@ void TileScene::removeTile(TileItem* tile)
     TileFactory fac;
     fac.deleteTile(tile->text(), tile->id());
     updateScene(m_width);
+}
+
+void TileScene::openLastSubject()
+{
+    if(m_lastId == -1) return;
+    for(QGraphicsItem* item : items())
+    {
+        TileItem* tile = static_cast<TileItem*>(item);
+        if(tile->id() == m_lastId)
+        {
+            emit showSubject(tile->text(), tile->previews(), tile->id());
+        }
+    }
 }

@@ -22,4 +22,5 @@ MspWidget::MspWidget(QWidget *parent) : QStackedWidget(parent)
     {
         setCurrentIndex(0);
     });
+    connect(m_options, &OptionsWidget::changeStyle, this, &MspWidget::changeStyle);
 }

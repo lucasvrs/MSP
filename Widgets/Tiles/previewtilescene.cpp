@@ -24,14 +24,14 @@ PreviewTileScene::PreviewTileScene(QObject *parent) : QGraphicsScene(parent)
 void PreviewTileScene::addItems()
 {
     m_tiles = m_factory->previewTiles();
-    m_tileLength = ((m_width - 20) - 11 * SPACING) / 10;
-    double xStart = -5 * m_tileLength - 5 * SPACING;
+    m_tileLength = ((m_width - 20) - (m_cols + 1) * SPACING) / m_cols;
+    double xStart = -(m_cols/2.0) * m_tileLength - (m_cols/2.0) * SPACING;
     double x = xStart;
     double height = 0;
     int row = 0;
     for(int i = 0; i < m_tiles.size(); i++)
     {
-        if(i % 10 == 0)
+        if(i % m_cols == 0)
         {
             row++;
             x = xStart;
@@ -43,7 +43,7 @@ void PreviewTileScene::addItems()
         x += (m_tileLength + SPACING);
         addItem(tile);
     }
-    if(m_tiles.size() % 10 == 0)
+    if(m_tiles.size() % m_cols == 0)
     {
         row++;
         x = xStart;
@@ -77,8 +77,8 @@ void PreviewTileScene::updateScene(double w)
     m_width = w;
     deleteItems();
     addItems();
-    int add = (m_tiles.size() + 1)%10;
-    int fac = ((m_tiles.size() + 1) - ((m_tiles.size() + 1)%10)) / 10;
+    int add = (m_tiles.size() + 1)%m_cols;
+    int fac = ((m_tiles.size() + 1) - ((m_tiles.size() + 1)%m_cols)) / m_cols;
     if(add != 0)
     {
         fac++;

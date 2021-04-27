@@ -6,6 +6,7 @@
 
 #include "tilesview.h"
 #include "tilescene.h"
+#include <QDebug>
 
 TilesView::TilesView(QWidget *parent) : QGraphicsView(parent)
 {
@@ -30,4 +31,12 @@ void TilesView::resizeEvent(QResizeEvent* e)
 void TilesView::scrollContentsBy(int, int v)
 {
     QGraphicsView::scrollContentsBy(0, v);
+}
+
+//SLOTS********************************************************
+void TilesView::updateTiles()
+{
+    m_scene->updateScene(width());
+    centerOn(0, 0);
+    m_scene->openLastSubject();
 }

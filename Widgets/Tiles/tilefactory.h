@@ -16,6 +16,8 @@ public:
     QList<TileItem*> tiles();
     void createTile(const QString& name, const QColor& color, const QColor &textColor);
     void deleteTile(const QString& name, int id);
+    void deletePreviewTile(const QString &title, int collectionId, const QString& name, int id);
+    void addAppToTile(const QString &name, int id, const QString& appName, int appId);
 
 private:
     XMLReader* m_reader;

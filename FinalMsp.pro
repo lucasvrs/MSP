@@ -52,6 +52,13 @@ SOURCES += \
     Widgets/ContentsWidget/mainviewwidget.cpp \
     Widgets/Converter/converterwidget.cpp \
     Widgets/FormulaCollection/formelsammlung.cpp \
+    Widgets/Help/helpwidget.cpp \
+    Widgets/Help/helpwidgetfactory.cpp \
+    Widgets/Help/mainhelpcontentswidget.cpp \
+    Widgets/Help/mainhelpwidget.cpp \
+    Widgets/Help/subjecthelpcontentswidget.cpp \
+    Widgets/Help/subjecthelpwidget.cpp \
+    Widgets/Help/widgetitem.cpp \
     Widgets/LiteratureEras/epochenscene.cpp \
     Widgets/LiteratureEras/erabutton.cpp \
     Widgets/LiteratureEras/eraview.cpp \
@@ -156,6 +163,13 @@ HEADERS += \
     Widgets/Converter/converterwidget.h \
     Widgets/FormulaCollection/constants.h \
     Widgets/FormulaCollection/formelsammlung.h \
+    Widgets/Help/helpwidget.h \
+    Widgets/Help/helpwidgetfactory.h \
+    Widgets/Help/mainhelpcontentswidget.h \
+    Widgets/Help/mainhelpwidget.h \
+    Widgets/Help/subjecthelpcontentswidget.h \
+    Widgets/Help/subjecthelpwidget.h \
+    Widgets/Help/widgetitem.h \
     Widgets/LiteratureEras/constants.h \
     Widgets/LiteratureEras/epochenscene.h \
     Widgets/LiteratureEras/erabutton.h \
@@ -240,6 +254,10 @@ DISTFILES += \
     Styling/lightmode.qss \
     Widgets/ArithmeticGame/KopfrechnenScore \
     Widgets/FormulaCollection/Formel.xml \
+    Widgets/Help/Help.xml \
     Widgets/LiteratureEras/eras.xml \
     Widgets/ToDoList/ToDo.xml \
     Widgets/VocabularyTrainer/Vokabeln.db
+
+RESOURCES += \
+    pictures.qrc

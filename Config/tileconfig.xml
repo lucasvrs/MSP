@@ -13,9 +13,9 @@
    <a>255</a>
   </textcolor>
   <apps>
-   <app>calculator</app>
-   <app>matrixcalculator</app>
-   <app>converter</app>
+   <app id="-1">calculator</app>
+   <app id="-2">converter</app>
+   <app id="-6">matrixcalculator</app>
   </apps>
  </math>
  <german id="2">
@@ -31,7 +31,9 @@
    <b>255</b>
    <a>255</a>
   </textcolor>
-  <apps/>
+  <apps>
+   <app id="-9">literatureeras</app>
+  </apps>
  </german>
  <computer_science id="3">
   <color>
@@ -46,7 +48,9 @@
    <b>255</b>
    <a>255</a>
   </textcolor>
-  <apps/>
+  <apps>
+   <app id="-3">pathfinding</app>
+  </apps>
  </computer_science>
  <physics id="4">
   <color>
@@ -61,6 +65,8 @@
    <b>255</b>
    <a>255</a>
   </textcolor>
-  <apps/>
+  <apps>
+   <app id="-4">reaction</app>
+  </apps>
  </physics>
 </tiles>

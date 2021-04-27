@@ -33,6 +33,10 @@ private:
     QString m_text;
     QWidget* m_widget;
     QList<TileItem*> m_previews;
+
+protected:
+    void hoverEnterEvent(QGraphicsSceneHoverEvent* e) override;
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent* e) override;
 };
 
 #endif // TILEITEM_H

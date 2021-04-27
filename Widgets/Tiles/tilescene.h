@@ -21,13 +21,14 @@ private:
     TileFactory* m_factory;
     QList<TileItem*> m_tiles;
     CreateCollectionDialog* m_dialog;
+    int m_lastId;
 
 protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* e) override;
     void contextMenuEvent(QGraphicsSceneContextMenuEvent* e) override;
 
 signals:
-    void showSubject(const QString& title, QList<TileItem*> list);
+    void showSubject(const QString& title, QList<TileItem*> list, int id);
 
 private slots:
     void addItems();
@@ -36,6 +37,7 @@ private slots:
 
 public slots:
     void updateScene(double w);
+    void openLastSubject();
 };
 
 #endif // TILESCENE_H

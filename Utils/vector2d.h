@@ -3,7 +3,6 @@
 
 #include <cmath>
 #include <QDebug>
-#include "utils.h"
 
 template<typename T>
 class Vector2d

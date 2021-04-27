@@ -41,4 +41,12 @@ InterfaceOptionsWidget::InterfaceOptionsWidget(QWidget *parent) : QWidget(parent
     hLayout->addWidget(saveBtn);
 
     connect(cancelBtn, &QPushButton::clicked, this, &InterfaceOptionsWidget::closeOptions);
+    connect(lightModeBtn, &QPushButton::clicked, [this]()
+    {
+        emit changeStyle(0);
+    });
+    connect(darkModeBtn, &QPushButton::clicked, [this]()
+    {
+        emit changeStyle(1);
+    });
 }

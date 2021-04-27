@@ -19,10 +19,12 @@ private:
 
 signals:
     void showWidget(QWidget* w);
+    void addTile();
 
 public slots:
     void setTitle(const QString& title);
     void setPreviews(QList<TileItem*> previews);
+    void setId(int id);
 };
 
 #endif // SUBJECTSTARTMENU_H

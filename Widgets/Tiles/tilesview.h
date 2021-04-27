@@ -21,7 +21,10 @@ protected:
     void scrollContentsBy(int, int v) override;
 
 signals:
-    void showSubject(const QString& title, QList<TileItem*> list);
+    void showSubject(const QString& title, QList<TileItem*> list, int id);
+
+public slots:
+    void updateTiles();
 };
 
 #endif // TILESVIEW_H

@@ -15,7 +15,7 @@ private:
     OptionsWidget* m_options;
 
 signals:
-
+    void changeStyle(int mode);
 };
 
 #endif // MSPWIDGET_H

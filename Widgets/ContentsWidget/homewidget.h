@@ -4,6 +4,7 @@
 #include <QWidget>
 
 class TileItem;
+class TilesView;
 
 class HomeWidget : public QWidget
 {
@@ -13,9 +14,14 @@ public:
     explicit HomeWidget(QWidget *parent = nullptr);
 
 private:
+    TilesView* m_view;
 
 signals:
-    void showSubject(const QString& title, QList<TileItem*> list);
+    void showSubject(const QString& title, QList<TileItem*> list, int id);
+    void setPrevWidget(QWidget* w);
+
+public slots:
+    void addTile();
 };
 
 #endif // HOMEWIDGET_H

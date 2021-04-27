@@ -17,6 +17,7 @@ private:
 
 signals:
     void closeOptions();
+    void changeStyle(int mode);
 };
 
 #endif // OPTIONSWIDGET_H

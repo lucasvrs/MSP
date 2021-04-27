@@ -7,12 +7,16 @@
 #include "sidemenutilescene.h"
 #include "tileitem.h"
 #include "addtile.h"
-#include <QDebug>
+#include "addpreviewdialog.h"
+#include "tilefactory.h"
+#include <QMenu>
 #include <QGraphicsSceneMouseEvent>
+#include <QDebug>
 
 SideMenuTileScene::SideMenuTileScene(QObject *parent) :
     QGraphicsScene(parent),
-    m_alreadyAdded(false)
+    m_alreadyAdded(false),
+    m_dialog(nullptr)
 {
 
 }
@@ -40,17 +44,20 @@ void SideMenuTileScene::addItems(QList<TileItem*> tiles)
         x += (m_tileLength + 10);
         if(!m_alreadyAdded) addItem(tile);
     }
-    if(m_tiles.size() % 1 == 0)
+    if(m_tiles.size() < 4)
     {
-        row++;
-        x = xStart;
+        if(m_tiles.size() % 1 == 0)
+        {
+            row++;
+            x = xStart;
+        }
+        AddTile* addTile = new AddTile;
+        addTile->setWidth(m_tileLength);
+        addTile->setHeight(m_tileLength);
+        addTile->setPos(x, height + (m_tileLength + 10) * row);
+        x += (m_tileLength + 10);
+        addItem(addTile);
     }
-    AddTile* addTile = new AddTile;
-    addTile->setWidth(m_tileLength);
-    addTile->setHeight(m_tileLength);
-    addTile->setPos(x, height + (m_tileLength + 10) * row);
-    x += (m_tileLength + 10);
-    addItem(addTile);
 }
 
 /*! Deletes all items from scene
@@ -88,9 +95,94 @@ void SideMenuTileScene::mouseReleaseEvent(QGraphicsSceneMouseEvent* e)
     QGraphicsItem* item = itemAt(e->scenePos(), QTransform());
     if(item != nullptr)
     {
-        TileItem* tile = static_cast<TileItem*>(item);
-        QWidget* w = tile->widget();
-        if(w != nullptr) emit showWidget(w);
+        if(e->button() == Qt::LeftButton)
+        {
+            TileItem* tile = static_cast<TileItem*>(item);
+            if(tile->text() == "+")
+            {
+                if(m_dialog == nullptr)
+                {
+                    m_dialog = new AddPreviewDialog;
+                    m_dialog->show();
+                    connect(m_dialog, &AddPreviewDialog::addTile, [this](TileItem* tile)
+                    {
+                        bool add = true;
+                        for(TileItem* t : m_tiles)
+                        {
+                            if(t->text() == tile->text())
+                            {
+                                add = false;
+                            }
+                        }
+                        if(add)
+                        {
+                            editTile(tile);
+                            emit addTile();
+                        }
+                    });
+                    connect(m_dialog, &AddPreviewDialog::closed, [this]()
+                    {
+                        m_dialog = nullptr;
+                    });
+                }
+                else
+                {
+                    m_dialog->raise();
+                }
+            }
+            else
+            {
+                QWidget* w = tile->widget();
+                if(w != nullptr) emit showWidget(w);
+            }
+        }
     }
     QGraphicsScene::mouseReleaseEvent(e);
+}
+
+void SideMenuTileScene::contextMenuEvent(QGraphicsSceneContextMenuEvent* e)
+{
+    QGraphicsItem* item = itemAt(e->scenePos(), QTransform());
+    if(item != nullptr)
+    {
+        TileItem* tile = static_cast<TileItem*>(item);
+        for(TileItem* t : m_tiles)
+        {
+            if(t == tile)
+            {
+                tile->setId(t->id());
+                break;
+            }
+        }
+        QMenu menu;
+        menu.addAction("Delete", [this, tile]()
+        {
+            removeTile(tile);
+        });
+        menu.exec(e->screenPos());
+    }
+    QGraphicsScene::contextMenuEvent(e);
+}
+
+void SideMenuTileScene::editTile(TileItem* tile)
+{
+    TileFactory fac;
+    fac.addAppToTile(m_title, m_id, tile->text(), tile->id());
+}
+
+void SideMenuTileScene::setTitle(const QString& title)
+{
+    m_title = title;
+}
+
+void SideMenuTileScene::setId(int id)
+{
+    m_id = id;
+}
+
+void SideMenuTileScene::removeTile(TileItem* tile)
+{
+    TileFactory fac;
+    fac.deletePreviewTile(m_title, m_id, tile->text(), tile->id());
+    emit addTile();
 }

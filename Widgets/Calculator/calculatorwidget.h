@@ -16,6 +16,7 @@ public:
 private:
     double calc(const QString& o, double a, double b);
     QList<QPushButton*> m_actions;
+    QList<QPushButton*> m_numbers;
     QLineEdit* m_edit;
     Calculator* m_calc;
 

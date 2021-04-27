@@ -14,4 +14,5 @@ OptionsWidget::OptionsWidget(QWidget *parent) : QTabWidget(parent)
     addTab(m_interface, "Interface");
 
     connect(m_interface, &InterfaceOptionsWidget::closeOptions, this, &OptionsWidget::closeOptions);
+    connect(m_interface, &InterfaceOptionsWidget::changeStyle, this, &OptionsWidget::changeStyle);
 }

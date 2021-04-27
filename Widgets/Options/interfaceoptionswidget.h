@@ -12,6 +12,7 @@ public:
 
 signals:
     void closeOptions();
+    void changeStyle(int mode);
 };
 
 #endif // INTERFACEOPTIONSWIDGET_H

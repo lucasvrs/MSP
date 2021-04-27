@@ -26,8 +26,9 @@ QList<TileItem*> TileFactory::tiles()
     for(QDomElement e : *m_reader->allElemsUnderRoot())
     {
         TileItem* tile = new TileItem;
-        XMLNameConverter conv(e.tagName());
-        tile->setText(conv.convertedName());
+        //XMLNameConverter conv(e.tagName());
+        //tile->setText(conv.convertedName());
+        tile->setText(e.tagName());
         tile->setId(e.attribute("id").toInt());
         QDomElement color = m_reader->findElemUnderElem(e, "color");
         QList<QDomElement> values = *m_reader->allElemsUnderElem(color);
@@ -72,7 +73,23 @@ void TileFactory::createTile(const QString& name, const QColor& color, const QCo
 
 void TileFactory::deleteTile(const QString &name, int id)
 {
-    QDomElement e = *m_writer->getRootElement();
+    //QDomElement e = *m_writer->getRootElement();
     m_writer->removeElement(name, "id", id);
+    m_writer->saveXML();
+}
+
+void TileFactory::deletePreviewTile(const QString& title, int collectionId, const QString &name, int id)
+{
+    QDomElement subjectElem = m_writer->getElementUnderRoot(title, "id", collectionId);
+    QDomElement elem = m_writer->getTileElement(subjectElem, "app", name, "id", id);
+    m_writer->removeElement(elem);
+    m_writer->saveXML();
+}
+
+void TileFactory::addAppToTile(const QString &name, int id, const QString& appName, int appId)
+{
+    QDomElement e = m_writer->getElement(name, "id", id);
+    QDomElement app = m_writer->getElementUnderElement(e, "apps");
+    m_writer->appendElementUnderElement(app, "app", appName, "id", appId);
     m_writer->saveXML();
 }

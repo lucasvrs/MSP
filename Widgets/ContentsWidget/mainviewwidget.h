@@ -13,7 +13,8 @@ private:
     QWidget* m_app;
 
 signals:
-
+    void newTitle(const QString& title);
+    void setPrevWidget(QWidget* w);
 };
 
 #endif // MAINVIEWWIDGET_H
